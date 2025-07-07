@@ -1,1 +1,4 @@
-# bekirr.dev / YAKINDA!
+# YAKINDA!
+
+
+https://tikzidev.com.tr
