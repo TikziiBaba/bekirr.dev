@@ -12,10 +12,20 @@
 <body>
 
   
-    <div class="loader-grid">
-        <div class="loader-text">Bir şeyler yükleniyor...</div>
-        
-    </div>
+    <!-- Top header with cloud icon, nav and theme toggle -->
+    <header class="site-header">
+        <div class="header-left">
+            <!-- Cloud icon (enlarged) -->
+            <a href="#" class="brand" aria-label="Anasayfa">
+                <svg class="icon-cloud" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M20 17.58A4.42 4.42 0 0015.58 13H15a5 5 0 10-9.9 1.25A3.5 3.5 0 005.5 20h11a3.5 3.5 0 003.5-3.42z" fill="currentColor" />
+                </svg>
+            </a>
+        </div>
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
+        </div>
+    </header>
 
     
     <main class="main-content">
@@ -66,9 +76,12 @@
 
         <footer>
             <p class="footer-credit">Bu site Bekir tarafından <span class="heart">🤍</span> ile tasarlanıp kodlandı.</p>
+
+            
+        
         </footer>
-    </main>
-    
+            
+        
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
