@@ -1,12 +1,81 @@
 :root {
-    --bg-color: #000000;
-    --text-primary: #ffffff;
-    --text-secondary: #888888;
-    --accent-color: #ffffff;
-    --border-color: #333333;
+    /* Light theme palette */
+    --bg-color: #ffffff;
+    --text-primary: #0b0b0b;
+    --text-secondary: #6b7280; /* slate-500-ish */
+    --accent-color: #111827; /* primary accent (dark) */
+    --border-color: #e6e6e6;
     --font-family: 'Inter', sans-serif;
+    --green-accent: #2E7D32;
+}
+
+/* Dark theme: applied when .dark-theme is present on <body> */
+body.dark-theme {
+    --bg-color: #000000;
+    --text-primary: #f7f7fb;
+    --text-secondary: #9ca3af; /* gray-400-ish */
+    --accent-color: #ffffff;
+    --border-color: #222222;
     --green-accent: #4CAF50;
 }
+
+/* Theme toggle button */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    backdrop-filter: blur(6px);
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0,0,0,0.04);
+}
+
+/* Slightly different hover on dark so it's visible */
+body.dark-theme .theme-toggle:hover {
+    background-color: rgba(255,255,255,0.04);
+}
+
+/* Header */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 6vw;
+    background-color: transparent;
+    z-index: 210;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.icon-cloud { color: var(--accent-color); width: 40px; height: 40px; }
+
+.header-right { display: flex; align-items: center; }
+
+/* Give page content room for fixed header */
+.main-content { padding-top: 90px; opacity: 1; }
 
 * {
     margin: 0;
@@ -21,39 +90,7 @@ body {
     overflow-x: hidden;
 }
 
-.loader-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    z-index: 100;
-    pointer-events: none;
-}
-
-.grid-item {
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-}
-
-.loader-text {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--text-secondary);
-    font-size: 1rem;
-    letter-spacing: 2px;
-    z-index: 101;
-    opacity: 0;
-}
-
-.main-content {
-    opacity: 0;
-}
+.loader-grid { display: none; }
 
 .content-section {
     min-height: 80vh;
@@ -142,11 +179,16 @@ body {
     border-top: 1px solid var(--border-color);
     text-decoration: none;
     color: var(--text-primary);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .project-item:hover {
-    background-color: #111;
+    background-color: #f7f7f8;
+}
+
+/* Dark theme: use a dark hover background for project items */
+body.dark-theme .project-item:hover {
+    background-color: #000000; /* black for dark theme hover */
 }
 
 .project-title {
@@ -222,12 +264,27 @@ footer {
     font-size: 0.9rem;
 }
 
+.heart-wrap { position: relative; display: inline-block; }
+.heart { display: inline-block; }
+.heart-wrap .footer-phone {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 120%;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.heart-wrap .footer-phone a { color: var(--text-primary); text-decoration: none; font-weight: 700; }
+.heart-wrap .footer-phone a:hover { text-decoration: underline; }
+
 .heart {
     display: inline-block;
+    color: #e0245e; /* visible heart color on light bg */
     animation: fade-heart 2s infinite ease-in-out;
 }
 
 @keyframes fade-heart {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.98); }
 }
