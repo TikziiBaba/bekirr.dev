@@ -1,60 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. AÇILIŞ GRİD ANİMASYONU ---
-    const loaderGrid = document.querySelector('.loader-grid');
-    const loaderText = document.querySelector('.loader-text'); // YENİ
-    const mainContent = document.querySelector('.main-content');
+    // --- THEME INITIALIZATION ---
+    const themeToggle = document.getElementById('theme-toggle');
 
-    // 100 tane grid kutusu oluştur
-    for (let i = 0; i < 100; i++) {
-        const item = document.createElement('div');
-        item.classList.add('grid-item');
-        loaderGrid.appendChild(item);
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggle.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 1.05l1.79-1.8-1.79-1.79-1.8 1.79 1.8 1.8zM20 11v2h3v-2h-3zM11 20v3h2v-3h-2zm6.24-2.76l1.8 1.79 1.79-1.79-1.79-1.8-1.8 1.8zM4.22 19.78l1.79-1.79-1.79-1.8-1.8 1.8 1.8 1.79zM12 6a6 6 0 100 12 6 6 0 000-12z" fill="currentColor"/></svg>';
+            themeToggle.setAttribute('aria-pressed', 'true');
+            themeToggle.setAttribute('aria-label', 'Açık tema');
+        } else {
+            document.body.classList.remove('dark-theme');
+            themeToggle.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/></svg>';
+            themeToggle.setAttribute('aria-pressed', 'false');
+            themeToggle.setAttribute('aria-label', 'Koyu tema');
+        }
     }
 
-    // GSAP ile animasyonu tanımla
-    const gridTl = gsap.timeline({
-        onComplete: setupScrollAnimations 
+    function detectPreferredTheme() {
+        const saved = localStorage.getItem('site-theme');
+        if (saved === 'dark' || saved === 'light') return saved;
+        // fallback to system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+        return 'light';
+    }
+
+    // initialize
+    const initialTheme = detectPreferredTheme();
+    applyTheme(initialTheme);
+
+    // toggle handler
+    themeToggle.addEventListener('click', () => {
+        const now = document.body.classList.contains('dark-theme') ? 'light' : 'dark';
+        applyTheme(now);
+        localStorage.setItem('site-theme', now);
     });
 
-    gridTl
-        .from(".grid-item", {
-            duration: 1,
-            scale: 0,
-            opacity: 0,
-            delay: 0.2,
-            ease: "power3.inOut",
-            stagger: {
-                amount: 1.5,
-                from: "center",
-                grid: "auto"
-            }
-        })
-        // YENİ: Metni canlandır
-        .to(loaderText, { duration: 1, opacity: 1, ease: "power2.inOut" }, "-=1.5")
-        .to(loaderText, { duration: 0.5, opacity: 0, ease: "power2.inOut" }, "+=0.5")
-        .to(".grid-item", {
-            duration: 1,
-            scale: 0,
-            opacity: 0,
-            ease: "power3.inOut",
-            stagger: {
-                amount: 1.5,
-                from: "center",
-                grid: "auto"
-            }
-        }, "-=0.5") // Metin kaybolurken grid de kaybolmaya başlasın
-        .to(loaderGrid, {
-            duration: 0.1,
-            display: 'none'
-        })
-        .to(mainContent, {
-            duration: 0.5,
-            opacity: 1,
-            onComplete: () => {
-                window.scrollTo(0, 0);
-            }
-        }, "-=0.5");
+
+    // No loader grid animation — show content immediately and set up scroll animations
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) mainContent.style.opacity = '1';
+    // register scroll animations immediately
+    setupScrollAnimations();
 
 
     // --- 2. KAYDIRMA ANİMASYONLARI ---
