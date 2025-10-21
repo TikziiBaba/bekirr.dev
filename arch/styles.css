@@ -1,0 +1,74 @@
+/* Basic reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; }
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #fff;
+	background: #000;
+	overflow: hidden;
+}
+
+#slideshow {
+	position: fixed;
+	inset: 0;
+	background-size: cover;
+	background-position: center;
+	transition: opacity 1s ease-in-out;
+	filter: brightness(0.6) saturate(1.05);
+	z-index: 0;
+}
+
+.overlay {
+	position: relative;
+	z-index: 5;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+}
+
+.poem-card {
+	max-width: 600px;
+	width: 100%;
+	background: rgba(0,0,0,0.45);
+	border-radius: 12px;
+	padding: 2rem;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+	backdrop-filter: blur(6px);
+}
+
+#poem-title {
+	font-size: clamp(1.15rem, 2.6vw, 1.75rem);
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+#poem-text {
+	white-space: pre-wrap;
+	line-height: 1.6;
+	font-size: clamp(0.95rem, 2.1vw, 1.1rem);
+	text-align: center;
+}
+
+.controls {
+	margin-top: 1.25rem;
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+}
+
+.controls button {
+	background: rgba(255,255,255,0.12);
+	color: #fff;
+	border: 1px solid rgba(255,255,255,0.14);
+	padding: 0.5rem 0.9rem;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.controls button:hover { background: rgba(255,255,255,0.16); }
+
+@media (max-width: 600px) {
+	.poem-card { padding: 1rem; }
+}
