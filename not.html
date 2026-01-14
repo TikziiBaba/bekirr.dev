@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Not Ortalaması</title>
+<style>
+body {
+  font-family: Arial;
+  background: #f2f2f2;
+  padding: 15px;
+}
+table {
+  width: 100%;
+  background: white;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
+}
+th {
+  background: #eaeaea;
+}
+input {
+  width: 55px;
+}
+button {
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>📊 Not Ortalaması Hesaplama</h2>
+
+<table>
+<tr>
+  <th>Ders</th>
+  <th>Saat</th>
+  <th>Sınav 1</th>
+  <th>Sınav 2</th>
+  <th>Sözlü 1</th>
+  <th>Sözlü 2</th>
+  <th>Ders Ort.</th>
+</tr>
+
+<tr><td>Resim</td><td class="saat">2</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Din</td><td class="saat">2</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Biyoloji</td><td class="saat">4</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Fizik</td><td class="saat">4</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Almanca</td><td class="saat">2</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Kimya</td><td class="saat">4</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Matematik</td><td class="saat">6</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Peygamber</td><td class="saat">1</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>İnkılap</td><td class="saat">2</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>Türkçe</td><td class="saat">5</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+<tr><td>İngilizce</td><td class="saat">4</td>
+<td><input class="n"></td><td><input class="n"></td>
+<td><input class="n"></td><td><input class="n"></td>
+<td class="ort">0</td></tr>
+
+</table>
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<h3>🎯 Genel Ortalama: <span id="genel">0</span></h3>
+
+<script>
+function hesapla() {
+  let toplam = 0;
+  let saatToplam = 0;
+
+  document.querySelectorAll("tr").forEach(row => {
+    let notlar = row.querySelectorAll(".n");
+    let ort = row.querySelector(".ort");
+    let saatEl = row.querySelector(".saat");
+
+    if (!notlar.length) return;
+
+    let sum = 0;
+    notlar.forEach(n => sum += Number(n.value || 0));
+    let dersOrt = sum / 4;
+    ort.innerText = dersOrt.toFixed(2);
+
+    let saat = Number(saatEl.innerText);
+    toplam += dersOrt * saat;
+    saatToplam += saat;
+  });
+
+  document.getElementById("genel").innerText =
+    (toplam / saatToplam).toFixed(2);
+}
+</script>
+
+</body>
+</html>
