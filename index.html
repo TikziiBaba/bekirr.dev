@@ -1,110 +1,59 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bekir Kaplan </title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bekir Kaplan</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-
-  
-    <!-- Top header with cloud icon, nav and theme toggle -->
-    <header class="site-header">
-        <div class="header-left">
-            <!-- Cloud icon (enlarged) -->
-            <a href="#" class="brand" aria-label="Anasayfa">
-                <svg class="icon-cloud" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M20 17.58A4.42 4.42 0 0015.58 13H15a5 5 0 10-9.9 1.25A3.5 3.5 0 005.5 20h11a3.5 3.5 0 003.5-3.42z" fill="currentColor" />
-                </svg>
-            </a>
-        </div>
-        <div class="header-right">
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
-        </div>
-    </header>
-
-    
-    <!-- Scroll Progress Bar (Top) -->
-    <div class="scroll-progress"></div>
-
-    <!-- Floating Particles Background -->
-    <div class="particles-container" aria-hidden="true"></div>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top" aria-label="Yukarı çık">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-
-    <main class="main-content">
-        <section class="content-section hero">
-            <h1>Selam, ben Bekir.</h1>
-            <p class="typing-text">Öğrenci @ Gazi Anadolu Lisesi.</p>
-            
-            <div class="scroll-indicator">
-                <div class="mouse"></div>
+    <main class="container">
+        <section class="hero">
+            <div>
+                <h1 class="no-offset hero-text">Selam, ben Bekir.</h1>
+                <p class="hero-description">Öğrenci @ Gazi Anadolu Lisesi.</p>
             </div>
         </section>
 
-        <section class="content-section intro">
-            <h2>Genelde pek birşey yapmam.</h2>
-            <h3>Yani gözüken kısımda</h3>
+        <section class="list-container">
+            <p class="list-text">Göz At</p>
+
+            <ul class="list">
+                <li style="--i: 0"><a href="https://luckmc.bekirr.dev" target="_blank">LuckMC Sitesi.</a></li>
+                <li style="--i: 1"><a href="https://github.com/TikziiBaba/luckmc_discord_bot" target="_blank">LuckMC
+                        Bot.</a></li>
+                <li style="--i: 2"><a href="http://bekirr.dev/assets/BekirKaplan-CV.pdf" target="_blank">CV İncele.</a>
+                </li>
+                <li style="--i: 3"><a href="https://github.com/TikziiBaba" target="_blank">GitHub.</a></li>
+                <li style="--i: 4"><a href="https://instagram.com/bxkir58" target="_blank">Instagram.</a></li>
+                <li style="--i: 5"><a href="mailto:dedyusuf99@gmail.com">Email.</a></li>
+                <li style="--i: 6">Kodlama.</li>
+                <li style="--i: 7">Tasarım.</li>
+                <li style="--i: 8">Geliştirme.</li>
+                <li style="--i: 9">Öğrenme.</li>
+                <li style="--i: 10">Üretme.</li>
+            </ul>
         </section>
 
-        <section class="content-section projects">
-            <h3>Uğruna Uykusuz Kaldığım Projeler</h3>
-            <div class="project-list">
-                <a href="https://luckmc.bekirr.dev" target="_blank" class="project-item">
-                    
-                    <span class="project-title"><span class="luckmc-luck">Luck</span>MC Sitesi</span>
-                    <span class="project-arrow">&#8599;</span>
-                </a>
-                <a href="https://github.com/TikziiBaba/luckmc_discord_bot" target="_blank" class="project-item">
-                    
-                    <span class="project-title"><span class="luckmc-luck">Luck</span>MC Discord Botu</span>
-                    <span class="project-arrow">&#8599;</span>
-                </a>
-                <a href="http://bekirr.dev/assets/BekirKaplan-CV.pdf" target="_blank" class="project-item">
-                    <span class="project-title">My CV</span>
-                    <span class="project-arrow">&#8599;</span>
-                </a>
+        <section class="hero">
+            <div>
+                <h1 class="no-offset hero-text">Yoksa Fikrin mi var?</h1>
+                <h1 class="no-offset hero-text"></h1>
+                <p class="hero-description">mail'in hala gelmedi.</p>
             </div>
         </section>
+    </main>
 
-        <section class="content-section contact">
-            <h2>Aklında bir fikir mi var?</h2>
-            <h2 class="contact-subtitle">Yoksa aradığın kişi ben miyim? O zaman <a href="assets/BekirKaplan-CV.pdf" target="_blank" class="cv-link">CV'me</a> göz at.</h2>
-            
-            <div class="contact-links">
-                <a href="https://github.com/TikziiBaba" target="_blank">GitHub</a>
-                <a href="https://instagram.com/bxkir58" target="_blank">Instagram</a>
-                <a href="mailto:dedyusuf99@gmail.com">Email</a>
-            </div>
-        </section>
+    <footer class="container">
+        <p>
+            Bu site <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener">Bekir Kaplan</a>
+            tarafından tasarlandı.
+        </p>
+    </footer>
 
-        <section class="content-section secret-section">
-            <div class="secret-input-container">
-                <input type="text" id="secret-input" class="secret-input" placeholder="Bir şeyler yaz..." autocomplete="off">
-                <div class="secret-input-line"></div>
-            </div>
-        </section>
-
-        <footer>
-            <p class="footer-credit">Bu site Bekir tarafından <span class="heart">🤍</span> ile tasarlanıp kodlandı.</p>
-
-            
-        
-        </footer>
-            
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="script.js"></script>
+    <script src="index.js"></script>
 </body>
-</html>
 
+</html>
