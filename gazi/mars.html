@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İstiklal Marşı - Gazi Anadolu Lisesi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: #0a0a0f;
+            font-family: 'Outfit', sans-serif;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 5%, rgba(200, 40, 40, 0.14) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 25%, rgba(220, 80, 50, 0.10) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(180, 30, 60, 0.07) 0%, transparent 50%);
+            z-index: 0;
+            animation: bgPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 100, 100, 0.4);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .school-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fca5a5, #f87171, #ef4444, #dc2626);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(252, 165, 165, 0.6);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .media-card {
+            width: 100%;
+            background: rgba(25, 15, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 0 40px rgba(239, 68, 68, 0.08),
+                0 20px 60px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: cardEntry 0.8s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .media-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 0 60px rgba(239, 68, 68, 0.15),
+                0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes cardEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .media-label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fca5a5;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .media-label::before {
+            content: '🇹🇷';
+            font-size: 1.4rem;
+        }
+
+        .media-description {
+            font-size: 0.9rem;
+            color: rgba(200, 150, 150, 0.5);
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        /* Audio visualizer animation */
+        .visualizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 60px;
+            margin-bottom: 28px;
+        }
+
+        .bar {
+            width: 5px;
+            background: linear-gradient(to top, #dc2626, #ef4444, #fca5a5);
+            border-radius: 3px;
+            animation: barAnim ease-in-out infinite;
+        }
+
+        @keyframes barAnim {
+            0%, 100% { height: 8px; }
+            50% { height: 50px; }
+        }
+
+        audio {
+            width: 100%;
+            border-radius: 30px;
+            outline: none;
+            filter: hue-rotate(330deg) brightness(0.85);
+        }
+
+        .credits {
+            margin-top: 50px;
+            font-size: 0.95rem;
+            color: rgba(252, 165, 165, 0.4);
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: 300;
+            animation: fadeIn 1.5s ease-out 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .credits span {
+            color: #f87171;
+            font-weight: 600;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ef4444, transparent);
+            border-radius: 3px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 600px) {
+            .school-title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+            .subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 3px;
+            }
+            .media-card {
+                padding: 24px 16px;
+                border-radius: 14px;
+            }
+            .container {
+                padding: 30px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <h1 class="school-title">Gazi Anadolu Lisesi</h1>
+        <p class="subtitle">İstiklal Marşı</p>
+
+        <div class="media-card">
+            <div class="media-label">Saygı Duruşu ve İstiklal Marşı</div>
+            <p class="media-description">1 Dakikalık Saygı Duruşu ve İstiklal Marşı</p>
+
+            <div class="visualizer" id="visualizer"></div>
+
+            <audio controls preload="metadata">
+                <source src="../music/1 dakikalık saygı duruşu ve istiklal marşı - hd görüntü.mp3" type="audio/mpeg">
+                Tarayıcınız ses oynatmayı desteklemiyor.
+            </audio>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="credits">Made by <span>Bekir</span></p>
+    </div>
+
+    <script>
+        // Create floating particles
+        const pContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 12 + 8) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+            p.style.background = `rgba(${200 + Math.random()*55}, ${50 + Math.random()*60}, ${50 + Math.random()*50}, ${Math.random()*0.3 + 0.2})`;
+            pContainer.appendChild(p);
+        }
+
+        // Create visualizer bars
+        const vis = document.getElementById('visualizer');
+        for (let i = 0; i < 20; i++) {
+            const bar = document.createElement('div');
+            bar.classList.add('bar');
+            bar.style.animationDuration = (Math.random() * 0.8 + 0.4) + 's';
+            bar.style.animationDelay = (Math.random() * 0.5) + 's';
+            bar.style.height = (Math.random() * 30 + 8) + 'px';
+            vis.appendChild(bar);
+        }
+    </script>
+</body>
+</html>
