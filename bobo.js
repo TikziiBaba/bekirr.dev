@@ -4,24 +4,24 @@
  * Örneğin: 'benim-resmim.png', 'tatil.jpg' vb.
  */
 const localImages = [
-    'bekir1.jpeg',
-    'bekir2.jpeg',
-    'bekir3.jpeg',
-    'bekir4.jpeg',
-    'bekir5.jpeg',
-    'bekir6.jpeg',
-    'saliha1.jpeg',
-    'saliha2.jpeg',
-    'saliha3.jpeg',
-    'saliha4.jpeg',
-    'saliha5.jpeg',
-    'saliha6.jpeg',
-    'sura1.jpeg',
-    'sura2.jpeg',
-    'sura3.jpeg',
-    'sura4.jpeg',
-    'sura5.jpeg',
-    'sura6.jpeg'
+    'img/bekir1.jpeg',
+    'img/bekir2.jpeg',
+    'img/bekir3.jpeg',
+    'img/bekir4.jpeg',
+    'img/bekir5.jpeg',
+    'img/bekir6.jpeg',
+    'img/saliha1.jpeg',
+    'img/saliha2.jpeg',
+    'img/saliha3.jpeg',
+    'img/saliha4.jpeg',
+    'img/saliha5.jpeg',
+    'img/saliha6.jpeg',
+    'img/sura1.jpeg',
+    'img/sura2.jpeg',
+    'img/sura3.jpeg',
+    'img/sura4.jpeg',
+    'img/sura5.jpeg',
+    'img/sura6.jpeg'
 ];
 
 const gallery = document.getElementById('gallery');
