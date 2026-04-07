@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="description" content="Modern, karanlık temalı bir resim galerisi">
+    <link rel="stylesheet" href="bobo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Şura nur Akbulut</h1>
+    </header>
+
+    <main class="gallery-container" id="gallery">
+        <!-- Resimler JS tarafından dinamik olarak buraya eklenecek -->
+    </main>
+
+    <!-- Lightbox (Tam ekran resim görüntüleyici) -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-overlay" id="lightbox-overlay"></div>
+        <div class="lightbox-content">
+            <button class="close-btn" id="close-btn" aria-label="Kapat">&times;</button>
+            <button class="nav-btn prev-btn" id="prev-btn" aria-label="Önceki">&#10094;</button>
+
+            <div class="img-wrapper">
+                <img class="lightbox-img" id="lightbox-img" src="" alt="Büyütülmüş resim">
+            </div>
+
+            <button class="nav-btn next-btn" id="next-btn" aria-label="Sonraki">&#10095;</button>
+        </div>
+    </div>
+
+    <script src="bobo.js"></script>
+</body>
+
+</html>
