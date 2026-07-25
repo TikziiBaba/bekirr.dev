@@ -892,9 +892,9 @@ body::before {
   .master-finale-stage {
     position: relative;
     inset: auto;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     grid-template-columns: 1fr;
     height: auto;
   }
@@ -903,23 +903,32 @@ body::before {
     display: none;
   }
   
+  .story-features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+
   .story-feature-card {
     position: relative;
     inset: auto !important;
     width: 100%;
     transform: none;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
   
   .journey-cards-grid,
   .workflow-steps-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   
   .bento-grid-master,
   .tech-stack-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

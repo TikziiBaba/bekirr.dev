@@ -24,24 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
         animateGlow();
     }
 
-    // 2. Interactive Card Tilt on Mouse Move
-    const tiltCards = document.querySelectorAll('.minimal-dev-card, .bento-card-master, .journey-card, .workflow-step-card');
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            const tiltX = (y / (rect.height / 2)) * -6;
-            const tiltY = (x / (rect.width / 2)) * 6;
-            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
-        });
+    // 2. Interactive Card Tilt on Mouse Move (Desktop Only)
+    if (window.innerWidth > 900) {
+        const tiltCards = document.querySelectorAll('.minimal-dev-card, .bento-card-master, .journey-card, .workflow-step-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const tiltX = (y / (rect.height / 2)) * -6;
+                const tiltY = (x / (rect.width / 2)) * 6;
+                card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+            });
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
         });
-    });
+    }
 
-    // 3. GSAP Master Scroll Presentation Engine
+    // 3. GSAP Master Scroll Presentation & Mobile Scroll Animations Engine
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
@@ -57,7 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Pinned Viewport Timeline for Desktop (>900px)
+        // -------------------------------------------------------------
+        // DESKTOP: Pinned Viewport Presentation Timeline (>900px)
+        // -------------------------------------------------------------
         if (window.innerWidth > 900) {
             const masterTL = gsap.timeline({
                 scrollTrigger: {
@@ -70,17 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // -------------------------------------------------------------
             // SCENE 1: Hero Stage Exit (0 -> 1.0)
-            // -------------------------------------------------------------
             masterTL.to('.hero-stage-layout', { autoAlpha: 0, y: -60, duration: 1.0, pointerEvents: 'none' }, 0);
 
-            // -------------------------------------------------------------
             // SCENE 2: Spinning Thick Solid Emerald Bitcoin Coin & Feature Cards (1.2 -> 9.5)
-            // -------------------------------------------------------------
             masterTL.to('.spinning-b-stage', { autoAlpha: 1, scale: 1.25, duration: 1.0, pointerEvents: 'auto' }, 1.2);
 
-            // 🌀 1440-degree Z-Axis Face Rotation (Stays thick and face-on at all times)
+            // 🌀 1440-degree Z-Axis Face Rotation
             masterTL.to('.spinning-b-emblem', {
                 rotation: 1440,
                 duration: 8.5,
@@ -118,9 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Coin stage exit
             masterTL.to('.spinning-b-stage', { autoAlpha: 0, scale: 0.5, duration: 0.8, pointerEvents: 'none' }, 9.2);
 
-            // -------------------------------------------------------------
             // SCENE 3: Tech Journey Stage (10.2 -> 12.8)
-            // -------------------------------------------------------------
             masterTL.fromTo('.master-journey-stage',
                 { autoAlpha: 0, y: 80, scale: 0.9 },
                 { autoAlpha: 1, y: 0, scale: 1, duration: 1.0, pointerEvents: 'auto' }, 10.2
@@ -133,9 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             masterTL.to('.master-journey-stage', { autoAlpha: 0, y: -80, scale: 0.9, duration: 0.8, pointerEvents: 'none' }, 12.2);
 
-            // -------------------------------------------------------------
             // SCENE 4: Workflow Stage (13.0 -> 15.6)
-            // -------------------------------------------------------------
             masterTL.fromTo('.master-workflow-stage',
                 { autoAlpha: 0, y: 80, scale: 0.9 },
                 { autoAlpha: 1, y: 0, scale: 1, duration: 1.0, pointerEvents: 'auto' }, 13.0
@@ -148,9 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             masterTL.to('.master-workflow-stage', { autoAlpha: 0, y: -80, scale: 0.9, duration: 0.8, pointerEvents: 'none' }, 15.0);
 
-            // -------------------------------------------------------------
             // SCENE 5: Bento Grid Stage / Projects (15.8 -> 18.4)
-            // -------------------------------------------------------------
             masterTL.fromTo('.master-bento-stage',
                 { autoAlpha: 0, y: 80, scale: 0.9 },
                 { autoAlpha: 1, y: 0, scale: 1, duration: 1.0, pointerEvents: 'auto' }, 15.8
@@ -163,9 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             masterTL.to('.master-bento-stage', { autoAlpha: 0, y: -80, scale: 0.9, duration: 0.8, pointerEvents: 'none' }, 17.8);
 
-            // -------------------------------------------------------------
             // SCENE 6: Grand Finale & Contact Stage (18.6 -> 20.6)
-            // -------------------------------------------------------------
             masterTL.fromTo('.master-finale-stage',
                 { autoAlpha: 0, y: 80, scale: 0.9 },
                 { autoAlpha: 1, y: 0, scale: 1, duration: 1.0, pointerEvents: 'auto' }, 18.6
@@ -175,8 +167,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 { autoAlpha: 0, y: 25 },
                 { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.1 }, 19.0
             );
+        } else {
+            // -------------------------------------------------------------
+            // MOBILE: Fluid ScrollTrigger Reveal Animations (<= 900px)
+            // -------------------------------------------------------------
+            const revealMobileElements = [
+                '.hero-text-area',
+                '.minimal-dev-card',
+                '.section-head-center',
+                '.story-feature-card',
+                '.journey-card',
+                '.workflow-step-card',
+                '.bento-card-master',
+                '.tech-stack-card',
+                '.cta-card-master'
+            ];
+
+            revealMobileElements.forEach(selector => {
+                const targets = document.querySelectorAll(selector);
+                targets.forEach(target => {
+                    gsap.fromTo(target,
+                        { opacity: 0, y: 35 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.7,
+                            ease: 'power2.out',
+                            scrollTrigger: {
+                                trigger: target,
+                                start: 'top 88%',
+                                toggleActions: 'play none none none'
+                            }
+                        }
+                    );
+                });
+            });
         }
     }
 
-    console.log("🚀 bekirr.dev — Clean Non-Overlapping Presentation Engine Initialized.");
+    console.log("🚀 bekirr.dev — Dual Desktop/Mobile GSAP Engine Initialized.");
 });
