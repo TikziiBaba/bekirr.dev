@@ -1,18 +1,18 @@
 <div align="center">
 
-  # ⚡ BEKİR KAPLAN — PERSONAL PORTFOLIO
+  # ⚡ BEKİR KAPLAN — KİŞİSEL PORTFOLYO SİTESİ
 
   <p align="center">
-    <b>Modern, Geometric & High-Performance Developer Portfolio</b><br />
-    Crafted with GSAP ScrollTrigger, Obsidian Glassmorphism & Emerald Green Aesthetics.
+    <b>Modern, Geometrik ve Yüksek Performanslı Yazılımcı Portfolyosu</b><br />
+    GSAP ScrollTrigger, Obsidyen Cam Estetiği & Zümrüt Yeşili Renk Paleti İle Geliştirildi.
   </p>
 
   <p align="center">
     <a href="https://bekirr.dev">
-      <img src="https://img.shields.io/badge/LIVE_DEMO-bekirr.dev-1ED760?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Live Demo" />
+      <img src="https://img.shields.io/badge/CANLI_SİTE-bekirr.dev-1ED760?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Canlı Demo" />
     </a>
     <a href="https://github.com/TikziiBaba">
-      <img src="https://img.shields.io/badge/GITHUB-TikziiBaba-12141C?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Profile" />
+      <img src="https://img.shields.io/badge/GITHUB-TikziiBaba-12141C?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Profil" />
     </a>
   </p>
 
@@ -31,61 +31,61 @@
 
 <br />
 
-## 🌟 Overview
+## 🌟 Genel Bakış
 
-Welcome to the official source repository for **[bekirr.dev](https://bekirr.dev)**. 
+**[bekirr.dev](https://bekirr.dev)** kişisel web sitesinin resmi GitHub deposudur.
 
-This website is designed as a **full-pinned presentation story viewport** that delivers a interactive scroll experience. Combining clean geometric lines, obsidian dark mode, smooth GSAP ScrollTrigger keyframing, and custom micro-interactions.
-
----
-
-## ✨ Key Features
-
-- **🌀 Master Pinned Presentation Engine**: Pinned 100vh viewport driven by GSAP ScrollTrigger timelines.
-- **🪙 Thick Solid Bitcoin-Style Emblem**: 3D spinning "B" emblem with smooth 1440-degree rotation.
-- **🎨 Glassmorphism & Emerald Aesthetics**: Obsidian dark mode with glowing emerald green accents (`#1ED760`).
-- **⚡ Zero Section Overlap Architecture**: `autoAlpha` visibility isolation for clean transitions at any scroll speed.
-- **📱 Responsive Layout**: Seamless transition from desktop pinned scroll to fluid mobile vertical layout.
-- **🎧 Featured Project Showcase**: Highlighted projects including Bekofy Music Platform & LuckMC Server Ecosystem.
+Bu site, ziyaretçilere etkileşimli bir hikaye anlatımı sunmak amacıyla **tam sabitlenmiş (pinned) sunum akışı** mimarisiyle tasarlanmıştır. Keskin geometrik hatlar, obsidyen karanlık mod, pürüzsüz GSAP ScrollTrigger kaydırma animasyonları ve özel mikro etkileşimleri bir araya getirir.
 
 ---
 
-## 🛠️ Built With
+## ✨ Öne Çıkan Özellikler
 
-| Layer | Technologies |
+- **🌀 Sabitlenmiş Sunum Motoru**: GSAP ScrollTrigger zaman çizgisi (timeline) ile yönetilen akıcı kaydırma deneyimi.
+- **🪙 Kalın Madeni Bitcoin Tarzı B Logosu**: 1440 derece Z-ekseninde dönen 3D yeşil madeni para logosu.
+- **🎨 Zümrüt Yeşili & Obsidyen Estetiği**: Neon yeşili vurgular (`#1ED760`) ve cam estetiği (glassmorphism).
+- **⚡ Çakışmasız Katman Mimarisi**: Her kaydırma hızında net görünürlük sağlayan `autoAlpha` izolasyonu.
+- **📱 Tam Uyumlu (Responsive) Yapı**: Masaüstünde sabitlenmiş sunum, mobilde ise dikey ve akıcı sayfa düzeni.
+- **🎧 Öne Çıkan Projeler**: Bekofy Müzik Platformu ve LuckMC Sunucu Ekosistemi gibi özgün çalışmaların tanıtımı.
+
+---
+
+## 🛠️ Kullanılan Teknolojiler
+
+| Katman | Teknolojiler |
 | :--- | :--- |
-| **Frontend Core** | HTML5, Modern Vanilla CSS (Custom Design System), JavaScript (ES6+) |
-| **Animation & Scroll Engine** | GSAP 3.13 & ScrollTrigger |
-| **Typography & Fonts** | Chakra Petch & Space Grotesk (Google Fonts) |
-| **Icons & Media** | Native Web Components, GitHub Profile Avatar Integration |
+| **Ön Yüz (Frontend)** | HTML5, Modern Vanilla CSS (Özel Tasarım Sistemi), JavaScript (ES6+) |
+| **Animasyon & Kaydırma Motoru** | GSAP 3.13 & ScrollTrigger eklentisi |
+| **Tipografi & Fontlar** | Chakra Petch & Space Grotesk (Google Fonts) |
+| **İkon ve Medya** | Web Bileşenleri, GitHub Profil Fotoğrafı Entegrasyonu |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Yerel Kurulum & Çalıştırma
 
-To run this project locally:
+Projeyi kendi bilgisayarınızda çalıştırmak için:
 
 ```bash
-# Clone the repository
+# Repoyu klonlayın
 git clone https://github.com/TikziiBaba/bekirr.dev.git
 
-# Navigate to directory
+# Proje dizinine girin
 cd bekirr.dev
 
-# Open index.html directly or serve using live-server / VS Code Live Server
+# index.html dosyasını bir canlı sunucu veya tıkla çalıştır ile açın
 npx live-server
 ```
 
 ---
 
-## 📬 Contact & Links
+## 📬 İletişim & Bağlantılar
 
-- **Website**: [bekirr.dev](https://bekirr.dev)
+- **Web Sitesi**: [bekirr.dev](https://bekirr.dev)
 - **GitHub**: [@TikziiBaba](https://github.com/TikziiBaba)
-- **Email**: [dedyusuf99@gmail.com](mailto:dedyusuf99@gmail.com)
+- **E-Posta**: [dedyusuf99@gmail.com](mailto:dedyusuf99@gmail.com)
 
 ---
 
 <div align="center">
-  <p>© 2026 <b>BEKİR KAPLAN</b>. Designed & Engineered with passion.</p>
+  <p>© 2026 <b>BEKİR KAPLAN</b>. Özenle tasarlandı ve kodlandı.</p>
 </div>
