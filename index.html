@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BEKİR KAPLAN — FULL-STACK DEVELOPER & SOFTWARE ENGINEER</title>
+    <meta name="description"
+        content="Bekir Kaplan — Full-stack geliştirici ve yazılım geliştirme uzmanı. Modern web teknolojileri, masaüstü uygulamaları ve sistem mimarileri." />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- GSAP Core & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Top GSAP Scroll Progress Bar -->
+    <div id="gsap-scroll-bar"></div>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Header Navigation (Far Left Branding, No Orange Badge, No Center Nav Links) -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="#" class="logo-brand">
+                <span class="logo-name">BEKİR <span>KAPLAN</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="mailto:dedyusuf99@gmail.com" class="btn-minimal btn-primary">İLETİŞİM</a>
+                <a href="https://github.com/TikziiBaba" target="_blank" class="btn-minimal btn-secondary">GITHUB</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 🌀 MASTER SCROLL PRESENTATION VIEWPORT (FULL PINNED SCROLL STORY) -->
+    <main class="master-scroll-viewport" id="hero">
+        <div class="master-stage-container">
+
+            <!-- STAGE 1: HERO STAGE -->
+            <div class="hero-stage-layout">
+                <div class="hero-text-area">
+                    <div class="hero-badge">
+                        <span>● FULL-STACK DEVELOPER & SOFTWARE ENGINEER</span>
+                    </div>
+                    <h1 class="hero-title">
+                        SELAM, BEN BEKİR — <span class="text-emerald">KOD VE TASARIM</span>
+                    </h1>
+                    <p class="hero-description">
+                        Full-stack yazılım geliştirici. Modern web teknolojileri, masaüstü uygulamaları ve performanslı dijital sistemler üretiyorum.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="mailto:dedyusuf99@gmail.com" class="btn-minimal btn-primary"
+                            style="padding: 12px 28px; font-size: 14px;">
+                            BANA ULAŞ (EMAIL)
+                        </a>
+                        <a href="https://github.com/TikziiBaba" target="_blank" class="btn-minimal btn-secondary"
+                            style="padding: 12px 28px; font-size: 14px;">
+                            GITHUB PROFİLİM ➔
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DEVELOPER PROFILE SHOWCASE CARD -->
+                <div class="hero-player-area">
+                    <div class="minimal-dev-card">
+                        <div class="dev-card-header">
+                            <div class="dev-avatar-badge">
+                                <img src="https://github.com/TikziiBaba.png" alt="Bekir Kaplan" />
+                            </div>
+                            <div class="dev-meta-info">
+                                <h3>BEKİR KAPLAN</h3>
+                                <p>FULL-STACK DEVELOPER & ENGINEER</p>
+                            </div>
+                        </div>
+
+                        <div class="dev-status-tag">
+                            <span>🟢 PROJELERE & İŞBİRLİKLERİNE AÇIK</span>
+                        </div>
+
+                        <div class="dev-skills-chips">
+                            <span class="dev-chip">NODE.JS</span>
+                            <span class="dev-chip">ELECTRON</span>
+                            <span class="dev-chip">JAVASCRIPT</span>
+                            <span class="dev-chip">REACT</span>
+                            <span class="dev-chip">SUPABASE</span>
+                            <span class="dev-chip">GSAP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 2: SPINNING THICK SOLID EMERALD BITCOIN-STYLE COIN EMBLEM & FLOATING STORY FEATURE CARDS -->
+            <div class="spinning-b-stage" id="about">
+                <div class="spinning-b-emblem">
+                    <div class="spinning-b-letter">B</div>
+                </div>
+            </div>
+
+            <!-- Floating Story Feature Cards -->
+            <div class="story-feature-card" id="story-feature-1">
+                <div class="story-card-icon">💻</div>
+                <h3 class="story-card-title">FULL-STACK YAZILIM</h3>
+                <p class="story-card-desc">Node.js, Electron ve modern JavaScript standartları ile yüksek performanslı masaüstü ve web sistemleri üretiyorum.</p>
+            </div>
+
+            <div class="story-feature-card" id="story-feature-2">
+                <div class="story-card-icon">🎨</div>
+                <h3 class="story-card-title">DİJİTAL TASARIM & UI/UX</h3>
+                <p class="story-card-desc">Cam estetiği (glassmorphism), obsidian karanlık mod ve akıcı mikro-animasyonlarla modern arayüzler tasarlıyorum.</p>
+            </div>
+
+            <div class="story-feature-card" id="story-feature-3">
+                <div class="story-card-icon">🚀</div>
+                <h3 class="story-card-title">YARATICI PROJELER</h3>
+                <p class="story-card-desc">Bekofy müzik platformu ve LuckMC sunucu ekosistemi gibi gerçek kullanıcılara hitap eden özgün projeler geliştiriyorum.</p>
+            </div>
+
+            <div class="story-feature-card" id="story-feature-4">
+                <div class="story-card-icon">💼</div>
+                <h3 class="story-card-title">PROFESYONEL MİMARİ</h3>
+                <p class="story-card-desc">Sektörel standartlarda ölçeklenebilir yazılımlar geliştiriyor, en yeni teknolojileri projelerime başarıyla entegre ediyorum.</p>
+            </div>
+
+            <!-- STAGE 3: DYNAMIC TECH JOURNEY & DUAL MARQUEE STAGE -->
+            <div class="master-journey-stage" id="journey">
+                <div class="section-head-center">
+                    <span class="section-label">YOLCULUK & TEKNOLOJİ</span>
+                    <h2 class="section-title">NELER YAPIYORUM & TEKNOLOJİ STACK'İM ⚡</h2>
+                </div>
+
+                <!-- Dual Infinite Marquee Bands -->
+                <div class="journey-marquee-wrap">
+                    <div class="marquee-track-scroll marquee-track-left">
+                        <span class="marquee-pill highlight">ELECTRON</span>
+                        <span class="marquee-pill">NODE.JS</span>
+                        <span class="marquee-pill highlight">REACT</span>
+                        <span class="marquee-pill">SUPABASE</span>
+                        <span class="marquee-pill highlight">GSAP SCROLLTRIGGER</span>
+                        <span class="marquee-pill">JAVASCRIPT</span>
+                        <span class="marquee-pill highlight">ELECTRON</span>
+                        <span class="marquee-pill">NODE.JS</span>
+                        <span class="marquee-pill highlight">REACT</span>
+                        <span class="marquee-pill">SUPABASE</span>
+                        <span class="marquee-pill highlight">GSAP SCROLLTRIGGER</span>
+                        <span class="marquee-pill">JAVASCRIPT</span>
+                    </div>
+                    <div class="marquee-track-scroll marquee-track-right">
+                        <span class="marquee-pill">BEKOFY</span>
+                        <span class="marquee-pill highlight">LUCKMC</span>
+                        <span class="marquee-pill">DISCORD RPC</span>
+                        <span class="marquee-pill highlight">REST API</span>
+                        <span class="marquee-pill">UI/UX DESIGN</span>
+                        <span class="marquee-pill highlight">GLASSMORPHISM</span>
+                        <span class="marquee-pill">BEKOFY</span>
+                        <span class="marquee-pill highlight">LUCKMC</span>
+                        <span class="marquee-pill">DISCORD RPC</span>
+                        <span class="marquee-pill highlight">REST API</span>
+                        <span class="marquee-pill">UI/UX DESIGN</span>
+                        <span class="marquee-pill highlight">GLASSMORPHISM</span>
+                    </div>
+                </div>
+
+                <!-- 4 Journey Capability Cards -->
+                <div class="journey-cards-grid">
+                    <div class="journey-card">
+                        <div class="journey-card-icon">⚡</div>
+                        <h4>01 / MASAÜSTÜ APPS</h4>
+                        <p>Electron.js mimarisi ile yerel performanslı şık masaüstü yazılımları.</p>
+                    </div>
+                    <div class="journey-card">
+                        <div class="journey-card-icon">🌐</div>
+                        <h4>02 / WEB PLATFORMLARI</h4>
+                        <p>React ve modern JavaScript ile responsive ve hızlı web uygulamaları.</p>
+                    </div>
+                    <div class="journey-card">
+                        <div class="journey-card-icon">🎨</div>
+                        <h4>03 / ANİMASYON & UI</h4>
+                        <p>GSAP ScrollTrigger ile etkileşimli, dinamik ve görsel arayüzler.</p>
+                    </div>
+                    <div class="journey-card">
+                        <div class="journey-card-icon">🎮</div>
+                        <h4>04 / API & BOTLAR</h4>
+                        <p>Discord RPC, canlı veri akışları ve sunucu otomasyon botları.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 4: WORKFLOW & ENGINEERING PRINCIPLES SECTION -->
+            <div class="master-workflow-stage" id="workflow">
+                <div class="section-head-center">
+                    <span class="section-label">ÇALIŞMA PRENSİPLERİ</span>
+                    <h2 class="section-title">GELIŞTIRME VE MİMARİ SÜRECİM 📐</h2>
+                </div>
+
+                <div class="workflow-steps-grid">
+                    <div class="workflow-step-card">
+                        <div class="workflow-step-num">01</div>
+                        <h4>ANALİZ & MİMARİ</h4>
+                        <p>Proje gereksinimlerini belirleme, temiz veri modeli ve sistem mimarisini tasarlama.</p>
+                    </div>
+                    <div class="workflow-step-card">
+                        <div class="workflow-step-num">02</div>
+                        <h4>MODÜLER KODLAMA</h4>
+                        <p>Bakımı kolay, okunaklı, modern JavaScript ve esnek full-stack kod standartları.</p>
+                    </div>
+                    <div class="workflow-step-card">
+                        <div class="workflow-step-num">03</div>
+                        <h4>UI/UX & ANIMASYON</h4>
+                        <p>Kullanıcıyı etkileyen akıcı mikro-animasyonlar, şık tipografi ve responsive düzen.</p>
+                    </div>
+                    <div class="workflow-step-card">
+                        <div class="workflow-step-num">04</div>
+                        <h4>TEST & CANLIYA ALMA</h4>
+                        <p>Hızlı yüklenme süreleri, performans testleri ve kesintisiz dağıtım süreçleri.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 5: MASTER BENTO GRID STAGE (PROJELERİM) -->
+            <div class="master-bento-stage" id="projects">
+                <div class="section-head-center">
+                    <span class="section-label">PROJELERİM</span>
+                    <h2 class="section-title">ÖNE ÇIKAN ÇALIŞMALAR</h2>
+                </div>
+
+                <div class="bento-grid-master">
+                    <div class="bento-card-master bento-card-wide">
+                        <span class="card-num-chip">01 // MÜZİK PLATFORMU</span>
+                        <h3 class="card-title-bento">Bekofy Müzik Platformu 🎧</h3>
+                        <p class="card-text-bento">
+                            Electron üzerine inşa edilmiş modern masaüstü müzik uygulaması. Canlı senkronize şarkı sözleri, Jam Sessions ve Discord RPC entegrasyonu.
+                        </p>
+                    </div>
+
+                    <a href="https://luckmc.bekirr.dev" target="_blank" class="bento-card-master">
+                        <span class="card-num-chip">02 // MINECRAFT</span>
+                        <h3 class="card-title-bento">LuckMC Ekosistemi ⚔️</h3>
+                        <p class="card-text-bento">
+                            Modern web teknolojileri ile geliştirilmiş sunucu sitesi ve gelişmiş moderasyon komutlu Discord botu.
+                        </p>
+                    </a>
+
+                    <div class="bento-card-master">
+                        <span class="card-num-chip">03 // WEB TECH</span>
+                        <h3 class="card-title-bento">Full-Stack Mimarisi ⚡</h3>
+                        <p class="card-text-bento">
+                            Node.js, React, Supabase, GSAP ScrollTrigger ve modern JavaScript standartları ile yüksek performanslı sistemler.
+                        </p>
+                    </div>
+
+                    <div class="bento-card-master bento-card-wide">
+                        <span class="card-num-chip">04 // TASARIM</span>
+                        <h3 class="card-title-bento">UI/UX & Animasyon Vizyonu 🎨</h3>
+                        <p class="card-text-bento">
+                            Obsidian temalı modern tasarımlar, mikro-etkileşimler ve responsive web deneyimleri ile estetik arayüzler.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 6: GRAND FINALE STAGE (TECH STACK & CONTACT) -->
+            <div class="master-finale-stage" id="contact">
+                <div class="tech-stack-grid">
+                    <div class="tech-stack-card">
+                        <h4>FRONTEND</h4>
+                        <ul>
+                            <li>HTML5 & CSS3</li>
+                            <li>JavaScript (ES6+)</li>
+                            <li>React.js</li>
+                            <li>GSAP / ScrollTrigger</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-stack-card">
+                        <h4>BACKEND & DESKTOP</h4>
+                        <ul>
+                            <li>Node.js</li>
+                            <li>Electron.js</li>
+                            <li>Supabase Database</li>
+                            <li>REST APIs</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-stack-card">
+                        <h4>ARAÇLAR & DİĞER</h4>
+                        <ul>
+                            <li>Git & GitHub</li>
+                            <li>VS Code</li>
+                            <li>Discord API</li>
+                            <li>Responsive Web Design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cta-card-master">
+                    <h2 class="cta-title-master">YOKSA FİKRİN Mİ VAR? 🚀</h2>
+                    <p class="cta-subtext-master">mail'in hala gelmedi. Yeni projeler, işbirlikleri veya tanışmak için mesaj gönderebilirsin.</p>
+                    <a href="mailto:dedyusuf99@gmail.com" class="btn-minimal btn-primary"
+                        style="padding: 14px 36px; font-size: 15px;">
+                        EMAIL GÖNDER (DEDYUSUF99@GMAIL.COM) ➔
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>
+            Bu site <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener">BEKİR KAPLAN</a>
+            tarafından tasarlandı ve geliştirildi. © 2026 Tüm hakları saklıdır.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
