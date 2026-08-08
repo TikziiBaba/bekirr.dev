@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //  7. SUPABASE AUTH
     // ════════════════════════════════════════════════════════════
     function isSupabaseConfigured() {
-        return typeof supabase !== 'undefined' &&
+        return typeof supabaseClient !== 'undefined' &&
             typeof SUPABASE_URL !== 'undefined' &&
             !SUPABASE_URL.includes('YOUR_PROJECT_ID');
     }
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setButtonLoading(DOM.registerSubmit, true);
 
         try {
-            const { data, error } = await supabase.auth.signUp({
+            const { data, error } = await supabaseClient.auth.signUp({
                 email: email,
                 password: password,
                 options: {
@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setButtonLoading(DOM.loginSubmit, true);
 
         try {
-            const { data, error } = await supabase.auth.signInWithPassword({
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
                 email: email,
                 password: password
             });
@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isSupabaseConfigured()) return;
 
         try {
-            await supabase.auth.signOut();
+            await supabaseClient.auth.signOut();
             showToast('Çıkış yapıldı.', 'success');
             switchView('portfolio');
         } catch (err) {
@@ -503,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        supabase.auth.onAuthStateChange((event, session) => {
+        supabaseClient.auth.onAuthStateChange((event, session) => {
             if (session?.user) {
                 currentUser = session.user;
                 updateUIForAuth(true);
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Also check initial session
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        supabaseClient.auth.getSession().then(({ data: { session } }) => {
             if (session?.user) {
                 currentUser = session.user;
                 updateUIForAuth(true);
@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // If Supabase is configured, try saving to database
         if (isSupabaseConfigured()) {
             try {
-                const { error } = await supabase
+                const { error } = await supabaseClient
                     .from('contact_messages')
                     .insert([{ name, email, message }]);
 
