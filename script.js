@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = null;
     let currentView = 'portfolio'; // 'portfolio' | 'dashboard'
 
+    // ── Admin Config ──
+    const ADMIN_EMAIL = 'dedyusuf99@gmail.com';
+    function isAdmin() {
+        return currentUser?.email === ADMIN_EMAIL;
+    }
+
     // ── DOM Cache ──
     const $ = (sel) => document.querySelector(sel);
     const $$ = (sel) => document.querySelectorAll(sel);
@@ -59,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Views
         portfolioView: $('#portfolioView'),
         dashboardView: $('#dashboardView'),
+        chatView: $('#chatView'),
         // Dashboard
         dashboardUserName: $('#dashboardUserName'),
         profileName: $('#profileName'),
@@ -66,8 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
         profileCreatedAt: $('#profileCreatedAt'),
         profileLastSignIn: $('#profileLastSignIn'),
         profileSessionExpiry: $('#profileSessionExpiry'),
+        profileBio: $('#profileBio'),
         btnBackToSite: $('#btnBackToSite'),
         btnDashboardLogout: $('#btnDashboardLogout'),
+        // Profile Edit Form
+        profileEditForm: $('#profileEditForm'),
+        profileEditName: $('#profileEditName'),
+        profileEditBioInput: $('#profileEditBioInput'),
+        avatarPicker: $('#avatarPicker'),
+        btnSaveProfile: $('#btnSaveProfile'),
+        // Password Update Form
+        passwordUpdateForm: $('#passwordUpdateForm'),
+        profileNewPassword: $('#profileNewPassword'),
+        profileConfirmPassword: $('#profileConfirmPassword'),
+        btnUpdatePassword: $('#btnUpdatePassword'),
         // Contact form
         contactForm: $('#contactForm'),
         contactSubmit: $('#contactSubmit'),
@@ -75,6 +94,57 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollProgress: $('#scroll-progress'),
         // Toast
         toastContainer: $('#toastContainer'),
+        // Live Chat
+        navChatBtn: $('#navChatBtn'),
+        chatFab: $('#chatFab'),
+        chatFabIcon: $('#chatFabIcon'),
+        chatPanel: $('#chatPanel'),
+        chatPanelClose: $('#chatPanelClose'),
+        chatMessages: $('#chatMessages'),
+        chatWelcome: $('#chatWelcome'),
+        chatInputArea: $('#chatInputArea'),
+        chatInput: $('#chatInput'),
+        chatSendBtn: $('#chatSendBtn'),
+        chatCharCount: $('#chatCharCount'),
+        chatLoginPrompt: $('#chatLoginPrompt'),
+        chatLoginBtn: $('#chatLoginBtn'),
+        chatOnlineText: $('#chatOnlineText'),
+        chatUnreadBadge: $('#chatUnreadBadge'),
+        btnExpandChat: $('#btnExpandChat'),
+        // Full Page Chat View
+        btnChatBackToSite: $('#btnChatBackToSite'),
+        chatPageOnlineCount: $('#chatPageOnlineCount'),
+        chatPageOnlineText: $('#chatPageOnlineText'),
+        chatSearchInput: $('#chatSearchInput'),
+        btnToggleSound: $('#btnToggleSound'),
+        soundIcon: $('#soundIcon'),
+        chatPageClearBtn: $('#chatPageClearBtn'),
+        chatPageMessages: $('#chatPageMessages'),
+        chatPageWelcome: $('#chatPageWelcome'),
+        chatPageInputArea: $('#chatPageInputArea'),
+        chatPageInput: $('#chatPageInput'),
+        chatPageSendBtn: $('#chatPageSendBtn'),
+        chatPageCharCount: $('#chatPageCharCount'),
+        chatPageLoginPrompt: $('#chatPageLoginPrompt'),
+        chatPageLoginBtn: $('#chatPageLoginBtn'),
+        chatPageRegisterBtn: $('#chatPageRegisterBtn'),
+        chatUsersList: $('#chatUsersList'),
+        // Admin
+        adminPanel: $('#adminPanel'),
+        adminTotalUsers: $('#adminTotalUsers'),
+        adminTotalMessages: $('#adminTotalMessages'),
+        adminTodayMessages: $('#adminTodayMessages'),
+        adminUserTableBody: $('#adminUserTableBody'),
+        adminUserSearch: $('#adminUserSearch'),
+        adminClearChat: $('#adminClearChat'),
+        adminEditOverlay: $('#adminEditOverlay'),
+        adminEditForm: $('#adminEditForm'),
+        adminEditClose: $('#adminEditClose'),
+        adminEditCancel: $('#adminEditCancel'),
+        adminEditUserId: $('#adminEditUserId'),
+        adminEditName: $('#adminEditName'),
+        adminEditEmail: $('#adminEditEmail'),
+        adminEditRole: $('#adminEditRole'),
     };
 
 
@@ -564,30 +634,59 @@ document.addEventListener('DOMContentLoaded', () => {
             DOM.userNav.style.display = 'flex';
 
             const name = currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'Kullanıcı';
-            const initial = name.charAt(0).toUpperCase();
+            const avatar = currentUser.user_metadata?.avatar_icon || name.charAt(0).toUpperCase();
 
             DOM.userNavName.textContent = name;
-            DOM.userNavAvatar.textContent = initial;
+            DOM.userNavAvatar.textContent = avatar;
+
+            // Show chat inputs, hide login prompts
+            if (DOM.chatInputArea) DOM.chatInputArea.style.display = 'block';
+            if (DOM.chatLoginPrompt) DOM.chatLoginPrompt.style.display = 'none';
+            if (DOM.chatPageInputArea) DOM.chatPageInputArea.style.display = 'block';
+            if (DOM.chatPageLoginPrompt) DOM.chatPageLoginPrompt.style.display = 'none';
         } else {
             DOM.authButtons.style.display = 'flex';
             DOM.userNav.style.display = 'none';
+
+            // Hide chat inputs, show login prompts
+            if (DOM.chatInputArea) DOM.chatInputArea.style.display = 'none';
+            if (DOM.chatLoginPrompt) DOM.chatLoginPrompt.style.display = 'flex';
+            if (DOM.chatPageInputArea) DOM.chatPageInputArea.style.display = 'none';
+            if (DOM.chatPageLoginPrompt) DOM.chatPageLoginPrompt.style.display = 'flex';
         }
     }
 
     function switchView(view) {
         currentView = view;
 
+        DOM.portfolioView?.classList.add('hidden');
+        DOM.dashboardView?.classList.remove('active');
+        DOM.chatView?.classList.remove('active');
+
+        if (DOM.navChatBtn) {
+            DOM.navChatBtn.classList.toggle('active', view === 'chat');
+        }
+
         if (view === 'dashboard') {
-            DOM.portfolioView.classList.add('hidden');
-            DOM.dashboardView.classList.add('active');
+            DOM.dashboardView?.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (view === 'chat') {
+            DOM.chatView?.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (window._initFullChatPage) {
+                window._initFullChatPage();
+            }
         } else {
-            DOM.portfolioView.classList.remove('hidden');
-            DOM.dashboardView.classList.remove('active');
+            DOM.portfolioView?.classList.remove('hidden');
         }
     }
 
-    // Dashboard navigation
+    // Navigation Events
+    DOM.navChatBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchView('chat');
+    });
+
     DOM.userNavAvatar?.addEventListener('click', () => {
         if (currentUser) switchView('dashboard');
     });
@@ -596,16 +695,40 @@ document.addEventListener('DOMContentLoaded', () => {
         switchView('portfolio');
     });
 
+    DOM.btnChatBackToSite?.addEventListener('click', () => {
+        switchView('portfolio');
+    });
+
+    DOM.chatPageLoginBtn?.addEventListener('click', () => {
+        openAuthModal('login');
+    });
+
+    DOM.chatPageRegisterBtn?.addEventListener('click', () => {
+        openAuthModal('register');
+    });
+
     function updateDashboard(session) {
         if (!session?.user) return;
         const user = session.user;
         const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Kullanıcı';
+        const bio = user.user_metadata?.bio || 'Geliştirici';
+        const avatar = user.user_metadata?.avatar_icon || '👨‍💻';
 
         DOM.dashboardUserName.textContent = name;
         DOM.profileName.textContent = name;
         DOM.profileEmail.textContent = user.email || '—';
         DOM.profileCreatedAt.textContent = formatDate(user.created_at);
         DOM.profileLastSignIn.textContent = formatDate(user.last_sign_in_at);
+        if (DOM.profileBio) DOM.profileBio.textContent = bio;
+
+        if (DOM.profileEditName) DOM.profileEditName.value = name;
+        if (DOM.profileEditBioInput) DOM.profileEditBioInput.value = bio;
+
+        if (DOM.avatarPicker) {
+            DOM.avatarPicker.querySelectorAll('.avatar-opt').forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-avatar') === avatar);
+            });
+        }
 
         if (session.expires_at) {
             const expiryDate = new Date(session.expires_at * 1000);
@@ -613,7 +736,129 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             DOM.profileSessionExpiry.textContent = '—';
         }
+
+        if (isAdmin() && DOM.adminPanel) {
+            DOM.adminPanel.style.display = 'block';
+            if (DOM.chatPageClearBtn) DOM.chatPageClearBtn.style.display = 'inline-block';
+            loadAdminData();
+        } else if (DOM.adminPanel) {
+            DOM.adminPanel.style.display = 'none';
+            if (DOM.chatPageClearBtn) DOM.chatPageClearBtn.style.display = 'none';
+        }
     }
+
+    // Avatar Picker Choice Listener
+    let selectedAvatarIcon = '👨‍💻';
+    DOM.avatarPicker?.querySelectorAll('.avatar-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+            DOM.avatarPicker.querySelectorAll('.avatar-opt').forEach(b => b.classList.remove('active'));
+            opt.classList.add('active');
+            selectedAvatarIcon = opt.getAttribute('data-avatar');
+        });
+    });
+
+    // Profile Edit Form Submit
+    DOM.profileEditForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!currentUser) return;
+
+        const newName = DOM.profileEditName.value.trim();
+        const newBio = DOM.profileEditBioInput.value.trim();
+
+        if (!newName) {
+            showToast('Lütfen ad ve soyadınızı girin.', 'error');
+            return;
+        }
+
+        const activeAvatarBtn = DOM.avatarPicker?.querySelector('.avatar-opt.active');
+        if (activeAvatarBtn) {
+            selectedAvatarIcon = activeAvatarBtn.getAttribute('data-avatar');
+        }
+
+        const submitBtn = DOM.btnSaveProfile;
+        setButtonLoading(submitBtn, true);
+
+        try {
+            const { data, error } = await supabaseClient.auth.updateUser({
+                data: {
+                    full_name: newName,
+                    bio: newBio,
+                    avatar_icon: selectedAvatarIcon
+                }
+            });
+
+            if (error) {
+                showToast('Profil güncellenemedi: ' + error.message, 'error');
+            } else {
+                if (data.user) currentUser = data.user;
+
+                // Sync with profiles table
+                try {
+                    await supabaseClient.from('profiles').upsert({
+                        id: currentUser.id,
+                        full_name: newName,
+                        bio: newBio,
+                        avatar_icon: selectedAvatarIcon,
+                        email: currentUser.email,
+                        updated_at: new Date().toISOString()
+                    });
+                } catch (pErr) {
+                    console.warn('Profiles table sync warning:', pErr);
+                }
+
+                updateUIForAuth(true);
+                updateDashboard({ user: currentUser });
+                if (window._renderChatParticipants) window._renderChatParticipants();
+
+                showToast('Profiliniz başarıyla güncellendi!', 'success');
+            }
+        } catch (err) {
+            console.error('Profile update error:', err);
+            showToast('Bir hata oluştu.', 'error');
+        }
+
+        setButtonLoading(submitBtn, false);
+    });
+
+    // Password Update Form Submit
+    DOM.passwordUpdateForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!currentUser) return;
+
+        const newPass = DOM.profileNewPassword.value.trim();
+        const confirmPass = DOM.profileConfirmPassword.value.trim();
+
+        if (!newPass || newPass.length < 6) {
+            showToast('Şifre en az 6 karakter olmalıdır.', 'error');
+            return;
+        }
+
+        if (newPass !== confirmPass) {
+            showToast('Şifreler birbiriyle eşleşmiyor.', 'error');
+            return;
+        }
+
+        const submitBtn = DOM.btnUpdatePassword;
+        setButtonLoading(submitBtn, true);
+
+        try {
+            const { error } = await supabaseClient.auth.updateUser({
+                password: newPass
+            });
+
+            if (error) {
+                showToast('Şifre güncellenemedi: ' + getAuthErrorMessage(error), 'error');
+            } else {
+                showToast('Şifreniz başarıyla değiştirildi!', 'success');
+                DOM.passwordUpdateForm.reset();
+            }
+        } catch (err) {
+            console.error('Password update error:', err);
+            showToast('Şifre güncellenirken hata oluştu.', 'error');
+        }
+
+        setButtonLoading(submitBtn, false);
+    });
 
     function formatDate(dateStr) {
         if (!dateStr) return '—';
@@ -765,6 +1010,628 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ════════════════════════════════════════════════════════════
+    //  13. LIVE CHAT ENGINE & DEDICATED PAGE
+    // ════════════════════════════════════════════════════════════
+    function initLiveChat() {
+        if (!DOM.chatFab || !DOM.chatPanel) return;
+
+        let chatOpen = false;
+        let chatChannel = null;
+        let messagesLoaded = false;
+        let unreadCount = 0;
+        let chatSoundEnabled = true;
+        const renderedMsgIds = new Set();
+
+        // Audio chime notification
+        function playMessageSound() {
+            if (!chatSoundEnabled) return;
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.25);
+            } catch (e) {
+                console.warn('Audio synth failed:', e);
+            }
+        }
+
+        // Sound toggle
+        DOM.btnToggleSound?.addEventListener('click', () => {
+            chatSoundEnabled = !chatSoundEnabled;
+            if (DOM.soundIcon) DOM.soundIcon.textContent = chatSoundEnabled ? '🔊' : '🔇';
+            showToast(`Sohbet sesleri ${chatSoundEnabled ? 'açıldı' : 'kapatıldı'}.`, 'info');
+        });
+
+        // Expand chat to full page
+        DOM.btnExpandChat?.addEventListener('click', () => {
+            if (chatOpen) toggleChat();
+            switchView('chat');
+        });
+
+        // Admin clear chat button in full page
+        DOM.chatPageClearBtn?.addEventListener('click', async () => {
+            if (!confirm('Tüm sohbet mesajlarını silmek istediğinden emin misin?')) return;
+            await clearAllChatMessages();
+        });
+
+        // Toggle Floating Chat Panel
+        function toggleChat() {
+            chatOpen = !chatOpen;
+
+            if (chatOpen) {
+                DOM.chatPanel.classList.add('open');
+                DOM.chatFab.classList.add('active');
+                DOM.chatFabIcon.textContent = '✕';
+
+                unreadCount = 0;
+                if (DOM.chatUnreadBadge) DOM.chatUnreadBadge.style.display = 'none';
+
+                if (!messagesLoaded) {
+                    loadMessages();
+                    subscribeToMessages();
+                    messagesLoaded = true;
+                }
+
+                if (currentUser && DOM.chatInput) {
+                    setTimeout(() => DOM.chatInput.focus(), 300);
+                }
+            } else {
+                DOM.chatPanel.classList.remove('open');
+                DOM.chatFab.classList.remove('active');
+                DOM.chatFabIcon.textContent = '💬';
+            }
+        }
+
+        DOM.chatFab.addEventListener('click', toggleChat);
+        DOM.chatPanelClose?.addEventListener('click', toggleChat);
+
+        DOM.chatLoginBtn?.addEventListener('click', () => {
+            toggleChat();
+            openAuthModal('login');
+        });
+
+        // Full Page Chat Initialization Expose
+        window._initFullChatPage = function() {
+            if (!messagesLoaded) {
+                loadMessages();
+                subscribeToMessages();
+                messagesLoaded = true;
+            }
+            renderChatParticipants();
+        };
+
+        // Render Active Participants list
+        function renderChatParticipants() {
+            if (!DOM.chatUsersList) return;
+            const participants = [
+                { name: 'Bekir Kaplan', status: 'Geliştirici 👑', avatar: '👨‍💻' }
+            ];
+
+            if (currentUser) {
+                const uName = currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'Anonim';
+                const uBio = currentUser.user_metadata?.bio || 'Üye';
+                const uAvatar = currentUser.user_metadata?.avatar_icon || '⚡';
+                if (uName !== 'Bekir Kaplan') {
+                    participants.push({ name: uName, status: uBio, avatar: uAvatar });
+                }
+            }
+
+            DOM.chatUsersList.innerHTML = participants.map(p => `
+                <div class="chat-user-item">
+                    <div class="chat-user-avatar">${p.avatar}</div>
+                    <div class="chat-user-info">
+                        <span class="chat-user-name">${escapeHTML(p.name)}</span>
+                        <span class="chat-user-status">${escapeHTML(p.status)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        window._renderChatParticipants = renderChatParticipants;
+
+        // Character Counters
+        function setupCharCounter(inputEl, counterEl, sendBtnEl) {
+            if (!inputEl || !counterEl) return;
+            inputEl.addEventListener('input', () => {
+                const len = inputEl.value.length;
+                counterEl.textContent = `${len} / 500`;
+                if (sendBtnEl) sendBtnEl.disabled = len === 0;
+
+                counterEl.className = 'chat-char-count';
+                if (len >= 450) {
+                    counterEl.classList.add('limit');
+                } else if (len >= 350) {
+                    counterEl.classList.add('warn');
+                }
+            });
+        }
+
+        setupCharCounter(DOM.chatInput, DOM.chatCharCount, DOM.chatSendBtn);
+        setupCharCounter(DOM.chatPageInput, DOM.chatPageCharCount, DOM.chatPageSendBtn);
+
+        // Emoji pills click handling
+        document.querySelectorAll('.chat-emoji-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const emoji = pill.getAttribute('data-emoji');
+                if (DOM.chatPageInput) {
+                    DOM.chatPageInput.value += emoji;
+                    DOM.chatPageInput.focus();
+                    DOM.chatPageInput.dispatchEvent(new Event('input'));
+                }
+            });
+        });
+
+        // Search Filter in Full Page Chat
+        DOM.chatSearchInput?.addEventListener('input', () => {
+            const query = DOM.chatSearchInput.value.toLowerCase().trim();
+            const msgs = DOM.chatPageMessages?.querySelectorAll('.chat-msg');
+            msgs?.forEach(msgEl => {
+                const text = msgEl.textContent.toLowerCase();
+                msgEl.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        });
+
+        // Send Message Handler
+        async function sendMessage(inputEl, sendBtnEl, charCountEl) {
+            if (!currentUser || !inputEl) return;
+            const message = inputEl.value.trim();
+            if (!message || message.length > 500) return;
+            if (!isSupabaseConfigured()) return;
+
+            if (message === '.clear' && isAdmin()) {
+                inputEl.value = '';
+                if (charCountEl) charCountEl.textContent = '0 / 500';
+                if (sendBtnEl) sendBtnEl.disabled = true;
+                await clearAllChatMessages();
+                return;
+            }
+
+            const userName = currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'Anonim';
+            const userAvatar = currentUser.user_metadata?.avatar_icon || '👨‍💻';
+
+            if (sendBtnEl) sendBtnEl.disabled = true;
+            inputEl.value = '';
+            if (charCountEl) {
+                charCountEl.textContent = '0 / 500';
+                charCountEl.className = 'chat-char-count';
+            }
+
+            const optimisticMsg = {
+                id: 'temp-' + Date.now(),
+                user_id: currentUser.id,
+                user_name: userName,
+                avatar_icon: userAvatar,
+                message: message,
+                created_at: new Date().toISOString()
+            };
+
+            if (DOM.chatWelcome) DOM.chatWelcome.style.display = 'none';
+            if (DOM.chatPageWelcome) DOM.chatPageWelcome.style.display = 'none';
+            renderMessage(optimisticMsg);
+            scrollToBottom();
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('chat_messages')
+                    .insert([{
+                        user_id: currentUser.id,
+                        user_name: userName,
+                        avatar_icon: userAvatar,
+                        message: message
+                    }])
+                    .select()
+                    .single();
+
+                if (error) {
+                    console.error('Chat send error:', error.message);
+                    showToast('Mesaj gönderilemedi.', 'error');
+                    removeTempMessage(optimisticMsg.id);
+                    inputEl.value = message;
+                    if (sendBtnEl) sendBtnEl.disabled = false;
+                } else if (data) {
+                    replaceTempMessageId(optimisticMsg.id, data.id);
+                }
+            } catch (err) {
+                console.error('Chat send error:', err);
+                showToast('Mesaj gönderilemedi.', 'error');
+                removeTempMessage(optimisticMsg.id);
+                inputEl.value = message;
+                if (sendBtnEl) sendBtnEl.disabled = false;
+            }
+        }
+
+        function removeTempMessage(tempId) {
+            DOM.chatMessages?.querySelector(`[data-msg-id="${tempId}"]`)?.remove();
+            DOM.chatPageMessages?.querySelector(`[data-msg-id="${tempId}"]`)?.remove();
+            renderedMsgIds.delete(tempId);
+        }
+
+        function replaceTempMessageId(tempId, realId) {
+            const el1 = DOM.chatMessages?.querySelector(`[data-msg-id="${tempId}"]`);
+            if (el1) el1.setAttribute('data-msg-id', realId);
+            const el2 = DOM.chatPageMessages?.querySelector(`[data-msg-id="${tempId}"]`);
+            if (el2) el2.setAttribute('data-msg-id', realId);
+            renderedMsgIds.delete(tempId);
+            renderedMsgIds.add(realId);
+        }
+
+        DOM.chatSendBtn?.addEventListener('click', () => sendMessage(DOM.chatInput, DOM.chatSendBtn, DOM.chatCharCount));
+        DOM.chatInput?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage(DOM.chatInput, DOM.chatSendBtn, DOM.chatCharCount);
+            }
+        });
+
+        DOM.chatPageSendBtn?.addEventListener('click', () => sendMessage(DOM.chatPageInput, DOM.chatPageSendBtn, DOM.chatPageCharCount));
+        DOM.chatPageInput?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage(DOM.chatPageInput, DOM.chatPageSendBtn, DOM.chatPageCharCount);
+            }
+        });
+
+        // Load Messages
+        async function loadMessages() {
+            if (!isSupabaseConfigured()) {
+                if (DOM.chatOnlineText) DOM.chatOnlineText.textContent = 'Bağlantı yok';
+                if (DOM.chatPageOnlineText) DOM.chatPageOnlineText.textContent = 'Bağlantı yok';
+                return;
+            }
+
+            const loadingHTML = `
+                <div class="chat-loading">
+                    <span class="chat-loading-dot"></span>
+                    <span class="chat-loading-dot"></span>
+                    <span class="chat-loading-dot"></span>
+                </div>
+            `;
+            if (DOM.chatWelcome) DOM.chatWelcome.innerHTML = loadingHTML;
+            if (DOM.chatPageWelcome) DOM.chatPageWelcome.innerHTML = loadingHTML;
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('chat_messages')
+                    .select('*')
+                    .order('created_at', { ascending: true })
+                    .limit(50);
+
+                if (error) {
+                    console.error('Chat load error:', error.message);
+                    const errHTML = `
+                        <span class="chat-welcome-icon">⚠️</span>
+                        <p>Mesajlar yüklenemedi.<br><small style="color:var(--text-muted)">${error.message}</small></p>
+                    `;
+                    if (DOM.chatWelcome) DOM.chatWelcome.innerHTML = errHTML;
+                    if (DOM.chatPageWelcome) DOM.chatPageWelcome.innerHTML = errHTML;
+                    if (DOM.chatOnlineText) DOM.chatOnlineText.textContent = 'Bağlantı hatası';
+                    if (DOM.chatPageOnlineText) DOM.chatPageOnlineText.textContent = 'Bağlantı hatası';
+                    return;
+                }
+
+                if (data && data.length > 0) {
+                    if (DOM.chatWelcome) DOM.chatWelcome.style.display = 'none';
+                    if (DOM.chatPageWelcome) DOM.chatPageWelcome.style.display = 'none';
+                    data.forEach(msg => renderMessage(msg));
+                    scrollToBottom();
+                } else {
+                    const emptyHTML = `
+                        <span class="chat-welcome-icon">🚀</span>
+                        <p>Henüz mesaj yok. İlk mesajı sen gönder!</p>
+                    `;
+                    if (DOM.chatWelcome) DOM.chatWelcome.innerHTML = emptyHTML;
+                    if (DOM.chatPageWelcome) DOM.chatPageWelcome.innerHTML = emptyHTML;
+                }
+
+                if (DOM.chatOnlineText) DOM.chatOnlineText.textContent = 'Aktif';
+                if (DOM.chatPageOnlineText) DOM.chatPageOnlineText.textContent = 'Aktif';
+            } catch (err) {
+                console.error('Chat load error:', err);
+                if (DOM.chatOnlineText) DOM.chatOnlineText.textContent = 'Hata';
+                if (DOM.chatPageOnlineText) DOM.chatPageOnlineText.textContent = 'Hata';
+            }
+        }
+
+        // Render Message in Dual Panels
+        function renderMessage(msg, isRealtime = false) {
+            if (msg.id && renderedMsgIds.has(msg.id)) return;
+            if (msg.id) renderedMsgIds.add(msg.id);
+
+            const isOwn = currentUser && msg.user_id === currentUser.id;
+            const time = new Date(msg.created_at || Date.now()).toLocaleTimeString('tr-TR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const safeMsg = escapeHTML(msg.message || '');
+            const safeName = escapeHTML(msg.user_name || 'Anonim');
+            const avatar = msg.avatar_icon || (isOwn ? (currentUser?.user_metadata?.avatar_icon || '👨‍💻') : '👤');
+
+            const contentHTML = `
+                <div class="chat-msg-header">
+                    <span class="chat-msg-user-avatar">${avatar}</span>
+                    <span class="chat-msg-name">${isOwn ? 'Sen' : safeName}</span>
+                    <span class="chat-msg-time">${time}</span>
+                </div>
+                <div class="chat-msg-bubble">${safeMsg}</div>
+            `;
+
+            const createMsgNode = () => {
+                const el = document.createElement('div');
+                el.className = `chat-msg ${isOwn ? 'own' : 'other'}`;
+                if (msg.id) el.setAttribute('data-msg-id', msg.id);
+                el.innerHTML = contentHTML;
+                return el;
+            };
+
+            if (DOM.chatMessages) DOM.chatMessages.appendChild(createMsgNode());
+            if (DOM.chatPageMessages) DOM.chatPageMessages.appendChild(createMsgNode());
+
+            if (isRealtime && !isOwn) {
+                playMessageSound();
+            }
+        }
+
+        // Subscribe to Realtime Messages
+        function subscribeToMessages() {
+            if (!isSupabaseConfigured()) return;
+
+            chatChannel = supabaseClient
+                .channel('chat-room')
+                .on(
+                    'postgres_changes',
+                    {
+                        event: 'INSERT',
+                        schema: 'public',
+                        table: 'chat_messages'
+                    },
+                    (payload) => {
+                        const msg = payload.new;
+                        if (!msg) return;
+
+                        if (msg.id && renderedMsgIds.has(msg.id)) return;
+
+                        if (DOM.chatWelcome) DOM.chatWelcome.style.display = 'none';
+                        if (DOM.chatPageWelcome) DOM.chatPageWelcome.style.display = 'none';
+
+                        renderMessage(msg, true);
+                        scrollToBottom();
+
+                        if (!chatOpen && currentView !== 'chat') {
+                            unreadCount++;
+                            if (DOM.chatUnreadBadge) {
+                                DOM.chatUnreadBadge.textContent = unreadCount > 99 ? '99+' : unreadCount;
+                                DOM.chatUnreadBadge.style.display = 'flex';
+                            }
+                        }
+                    }
+                )
+                .subscribe((status) => {
+                    console.log('Chat Realtime status:', status);
+                    const statusText = status === 'SUBSCRIBED' ? 'Aktif' : 'Bağlantı koptu';
+                    if (DOM.chatOnlineText) DOM.chatOnlineText.textContent = statusText;
+                    if (DOM.chatPageOnlineText) DOM.chatPageOnlineText.textContent = statusText;
+                });
+        }
+
+        function scrollToBottom() {
+            requestAnimationFrame(() => {
+                if (DOM.chatMessages) DOM.chatMessages.scrollTop = DOM.chatMessages.scrollHeight;
+                if (DOM.chatPageMessages) DOM.chatPageMessages.scrollTop = DOM.chatPageMessages.scrollHeight;
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && chatOpen) {
+                toggleChat();
+            }
+        });
+    }
+
+
+    // ════════════════════════════════════════════════════════════
+    //  14. ADMIN PANEL
+    // ════════════════════════════════════════════════════════════
+    let allUsersCache = [];
+
+    async function loadAdminData() {
+        if (!isAdmin() || !isSupabaseConfigured()) return;
+
+        // Load stats
+        try {
+            const [usersRes, msgsRes] = await Promise.all([
+                supabaseClient.from('profiles').select('*', { count: 'exact' }),
+                supabaseClient.from('chat_messages').select('*', { count: 'exact' })
+            ]);
+
+            if (usersRes.data) {
+                DOM.adminTotalUsers.textContent = usersRes.count || usersRes.data.length;
+                allUsersCache = usersRes.data;
+                renderUserTable(allUsersCache);
+            }
+
+            if (msgsRes.data) {
+                DOM.adminTotalMessages.textContent = msgsRes.count || msgsRes.data.length;
+                // Count today's messages
+                const today = new Date().toISOString().split('T')[0];
+                const todayMsgs = msgsRes.data.filter(m => m.created_at?.startsWith(today));
+                DOM.adminTodayMessages.textContent = todayMsgs.length;
+            }
+        } catch (err) {
+            console.error('Admin data load error:', err);
+        }
+    }
+
+    function renderUserTable(users) {
+        if (!DOM.adminUserTableBody) return;
+
+        if (!users || users.length === 0) {
+            DOM.adminUserTableBody.innerHTML = `
+                <tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:40px;">Kullanıcı bulunamadı.</td></tr>
+            `;
+            return;
+        }
+
+        DOM.adminUserTableBody.innerHTML = users.map(user => {
+            const name = user.full_name || user.email?.split('@')[0] || 'Anonim';
+            const initial = name.charAt(0).toUpperCase();
+            const role = user.role || 'user';
+            const isAdminUser = role === 'admin';
+            const date = user.created_at ? new Date(user.created_at).toLocaleDateString('tr-TR', {
+                year: 'numeric', month: 'short', day: 'numeric'
+            }) : '—';
+
+            return `
+                <tr data-user-id="${user.id}">
+                    <td>
+                        <div class="admin-user-cell">
+                            <div class="admin-user-avatar">${initial}</div>
+                            <span class="admin-user-name">${escapeHTML(name)}</span>
+                        </div>
+                    </td>
+                    <td>${escapeHTML(user.email || '—')}</td>
+                    <td>${date}</td>
+                    <td>
+                        <span class="admin-role-badge ${isAdminUser ? 'role-admin' : 'role-user'}">
+                            ${isAdminUser ? '🛡️ Admin' : 'Kullanıcı'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="admin-actions">
+                            <button class="admin-btn" onclick="window._adminEditUser('${user.id}')">Düzenle</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function escapeHTML(str) {
+        if (!str) return '';
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // — Clear all chat messages (Admin) —
+    async function clearAllChatMessages() {
+        if (!isAdmin() || !isSupabaseConfigured()) return;
+
+        try {
+            const { error } = await supabaseClient
+                .from('chat_messages')
+                .delete()
+                .neq('id', '00000000-0000-0000-0000-000000000000'); // Delete all rows
+
+            if (error) {
+                console.error('Clear chat error:', error.message);
+                showToast('Sohbet temizlenemedi: ' + error.message, 'error');
+                return;
+            }
+
+            // Clear UI
+            if (DOM.chatMessages) {
+                DOM.chatMessages.querySelectorAll('.chat-msg').forEach(el => el.remove());
+                if (DOM.chatWelcome) {
+                    DOM.chatWelcome.style.display = 'flex';
+                    DOM.chatWelcome.innerHTML = `
+                        <span class="chat-welcome-icon">🧹</span>
+                        <p>Sohbet temizlendi.</p>
+                    `;
+                }
+            }
+
+            showToast('Tüm sohbet mesajları temizlendi.', 'success');
+        } catch (err) {
+            console.error('Clear chat error:', err);
+            showToast('Sohbet temizlenirken hata oluştu.', 'error');
+        }
+    }
+
+    // — Admin Edit User —
+    window._adminEditUser = function(userId) {
+        const user = allUsersCache.find(u => u.id === userId);
+        if (!user) return;
+
+        DOM.adminEditUserId.value = user.id;
+        DOM.adminEditName.value = user.full_name || '';
+        DOM.adminEditEmail.value = user.email || '';
+        DOM.adminEditRole.value = user.role || 'user';
+
+        DOM.adminEditOverlay.classList.add('active');
+    };
+
+    function closeAdminEditModal() {
+        DOM.adminEditOverlay?.classList.remove('active');
+    }
+
+    DOM.adminEditClose?.addEventListener('click', closeAdminEditModal);
+    DOM.adminEditCancel?.addEventListener('click', closeAdminEditModal);
+    DOM.adminEditOverlay?.addEventListener('click', (e) => {
+        if (e.target === DOM.adminEditOverlay) closeAdminEditModal();
+    });
+
+    // — Save edited user —
+    DOM.adminEditForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!isAdmin() || !isSupabaseConfigured()) return;
+
+        const userId = DOM.adminEditUserId.value;
+        const newName = DOM.adminEditName.value.trim();
+        const newRole = DOM.adminEditRole.value;
+
+        if (!userId || !newName) {
+            showToast('Ad soyad boş olamaz.', 'error');
+            return;
+        }
+
+        try {
+            const { error } = await supabaseClient
+                .from('profiles')
+                .update({ full_name: newName, role: newRole })
+                .eq('id', userId);
+
+            if (error) {
+                showToast('Güncelleme hatası: ' + error.message, 'error');
+                return;
+            }
+
+            showToast(`${newName} başarıyla güncellendi.`, 'success');
+            closeAdminEditModal();
+            loadAdminData(); // Refresh table
+        } catch (err) {
+            showToast('Güncelleme hatası.', 'error');
+        }
+    });
+
+    // — Admin search filter —
+    DOM.adminUserSearch?.addEventListener('input', () => {
+        const query = DOM.adminUserSearch.value.toLowerCase().trim();
+        if (!query) {
+            renderUserTable(allUsersCache);
+            return;
+        }
+        const filtered = allUsersCache.filter(u =>
+            (u.full_name || '').toLowerCase().includes(query) ||
+            (u.email || '').toLowerCase().includes(query)
+        );
+        renderUserTable(filtered);
+    });
+
+    // — Admin clear chat button —
+    DOM.adminClearChat?.addEventListener('click', async () => {
+        if (!confirm('Tüm sohbet mesajlarını silmek istediğinden emin misin?')) return;
+        await clearAllChatMessages();
+        loadAdminData(); // Refresh stats
+    });
+
+
+    // ════════════════════════════════════════════════════════════
     //  INIT
     // ════════════════════════════════════════════════════════════
     initScrollReveal();
@@ -773,6 +1640,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCardTilt();
     initGSAP();
     initAuthListener();
+    initLiveChat();
 
-    console.log('🚀 bekirr.dev — Portfolio + Auth Engine Active.');
+    console.log('🚀 bekirr.dev — Portfolio + Auth + Live Chat + Admin Engine Active.');
 });
