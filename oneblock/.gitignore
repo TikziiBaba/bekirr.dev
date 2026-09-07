@@ -1,0 +1,7 @@
+# Minecraft Server runtime clutter
+cache/
+logs/
+*.log
+*.log.gz
+.console_history
+target/

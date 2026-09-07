@@ -1,0 +1,64 @@
+name: TekBlok
+version: 1.0.0
+main: dev.bekirr.tekblok.TekBlokPlugin
+api-version: 1.16
+authors: [Bekir]
+description: Minecraft 1.16.1 gelismis OneBlock (Tek Blok) Skyblock Eklentisi.
+
+commands:
+  ada:
+    description: Ada yonetimi ve ana menu
+    aliases: [tekblok, ob, oneblock]
+    permission: tekblok.use
+  spawn:
+    description: Lobiye / Spawn noktasina isinlanma
+    aliases: [lobi, lobby]
+    permission: tekblok.use
+  setspawn:
+    description: Lobi spawn noktasini belirler
+    aliases: [spawnset, spawnayarla]
+    permission: tekblok.admin
+  kasa:
+    description: Kasa ve kasa anahtari islemleri
+    aliases: [crate, kasalar, crates]
+    permission: tekblok.use
+  koylu:
+    description: Maden eritici ve takasci koylu yonetimi
+    aliases: [npc, villager]
+    permission: tekblok.admin
+  obadmin:
+    description: TekBlok yonetici komutlari
+    aliases: [tekblokadmin]
+    permission: tekblok.admin
+  para:
+    description: Bakiye goruntuleme ve para transferi
+    aliases: [bakiye, money, pay]
+    permission: tekblok.use
+  ciftci:
+    description: Ada ciftcisi otomatik toplama ve satis menusu
+    aliases: [farmer]
+    permission: tekblok.use
+  market:
+    description: Oyun ici market ve satin alma menusu
+    aliases: [shop, magaza]
+    permission: tekblok.use
+  takas:
+    description: Oyuncular arasi guvenli ve butonlu esya takasi
+    aliases: [trade]
+    permission: tekblok.use
+  sat:
+    description: Hizli esya satis sandigi acma komutu
+    aliases: [sell, satisyap, chestsells]
+    permission: tekblok.use
+  minyon:
+    description: Ada kirici minyon yonetimi ve menusu
+    aliases: [minion]
+    permission: tekblok.use
+
+permissions:
+  tekblok.use:
+    description: TekBlok komutlarini kullanma yetkisi
+    default: true
+  tekblok.admin:
+    description: TekBlok yonetici komutlarini kullanma yetkisi
+    default: op

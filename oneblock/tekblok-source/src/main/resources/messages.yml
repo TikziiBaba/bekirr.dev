@@ -1,0 +1,106 @@
+# =======================================================
+#               TEKBLOK MESAJLARI VE DİL DOSYASI
+#            Minecraft 1.16.1 - %100 Renkli Türkçe
+# =======================================================
+
+prefix: "&8[&6TekBlok&8]&r "
+
+titles:
+  phase-up-title: "&6&lAŞAMA ATLANDI!"
+  phase-up-subtitle: "&eYeni Aşama: {phase_name}"
+  void-saved-title: "&c&lDİKKAT!"
+  void-saved-subtitle: "&eBoşluğa düştünüz, adanıza kurtarıldınız."
+
+messages:
+  only-players: "&cBu komutu yalnızca oyundaki oyuncular kullanabilir."
+  no-permission: "&cBu işlemi gerçekleştirmek için yetkiniz bulunmuyor."
+  not-island-member: "&cBu ada bloğunu kırmak için adanın sahibi veya üyesi olmalısınız!"
+  lucky-chest-spawned: "&6★ Şanslı Ganimet Sandığı belirdi! İçindekileri hemen topla."
+  mob-spawned: "&c⚠ Dikkat! Bloğun üzerinde bir canlı belirdi!"
+  phase-up: "&6★ Tebrikler! &eAşama {phase_id} ({phase_name}) &6seviyesine ulaştınız!"
+  island-created: "&aAdanız ve Tek Bloğunuz başarıyla oluşturuldu! İyi oyunlar."
+  teleported-to-island: "&aAdanızın tek bloğuna ışınlandınız."
+  no-island: "&cHenüz bir adanız bulunmuyor. &e/ada git &cyazarak adanızı oluşturabilirsiniz."
+  void-saved: "&eBoşluğa düştüğünüz için adanızın merkezine güvenle ışınlandınız."
+  invite-usage: "&cKullanım: &e/ada davet <oyuncu>"
+  player-not-found: "&cBelirtilen oyuncu bulunamadı veya çevrimdışı."
+  cannot-invite-self: "&cKendinizi adanıza davet edemezsiniz!"
+  must-be-island-owner: "&cBu işlemi yalnızca ada sahibi gerçekleştirebilir!"
+  invite-sent: "&a{player} adlı oyuncuya ada daveti gönderildi."
+  invite-received: "&e{player} sizi Tek Blok adasına davet etti! Katılmak için butonları kullanabilirsiniz:"
+  no-pending-invite: "&cBekleyen herhangi bir ada davetiniz bulunmuyor."
+  invite-expired: "&cDavet eden oyuncunun adası artık geçerli değil."
+  invite-accepted: "&a{owner} adlı oyuncunun adasına başarıyla katıldınız!"
+  invite-denied: "&cAda davetini geri çevirdiniz."
+  invite-denied-sender: "&c{player} ada davetinizi reddetti."
+  member-joined: "&e{player} adanıza ortak üye olarak katıldı!"
+  island-reset: "&cAdanızın bloğu ve ilerlemesi sıfırlandı. Yeniden 1. Aşamadasınız."
+  admin-reload-success: "&aYapılandırma ve aşama dosyaları başarıyla yenilendi!"
+
+  # Ada Silme
+  island-delete-warning: "&c&l⚠ DİKKAT: &eAdanızı, tüm bloklarınızı ve ilerlemenizi kalıcı olarak silmek üzeresiniz!"
+  island-deleted-owner: "&cAdanız başarıyla silindi ve lobiye ışınlandınız."
+  island-deleted-member: "&cOrtak olduğunuz ada sahibi tarafından silindiği için lobiye ışınlandınız."
+
+  # Ziyaret (Visit)
+  visit-usage: "&cKullanım: &e/ada ziyaret <oyuncu>"
+  visiting-island: "&a{player} adlı oyuncunun adasına ışınlanıyorsunuz..."
+  visitor-arrived: "&e{player} adanızı ziyarete geldi!"
+  player-has-no-island: "&cBu oyuncunun herhangi bir adası bulunmuyor."
+  cannot-visit-self: "&cZaten kendi adanızdasınız! Kendi adanıza gitmek için: &e/ada git"
+
+  # Sıralama (Leaderboard / Top)
+  top-header: "&6===== &e&lTekBlok En Çok Blok Kıranlar (Top 10) &6====="
+  top-entry: "&e{rank}. &f{player} &7- &a{blocks} blok &8(&bAşama {phase}&8)"
+  top-empty: "&7Henüz sıralamada hiç ada kaydı bulunmuyor."
+  top-footer: "&6================================================="
+
+  # Ekonomi Mesajları
+  balance-self: "&7Mevcut Bakiyeniz: &a{balance}"
+  balance-other: "&e{player} &7adlı oyuncunun bakiyesi: &a{balance}"
+  pay-usage: "&cKullanım: &e/para gonder <oyuncu> <miktar>"
+  cannot-pay-self: "&cKendinize para gönderemezsiniz!"
+  invalid-amount: "&cGeçersiz para miktarı girdiniz."
+  insufficient-balance: "&cYetersiz bakiye! Bu işlem için paranız yetersiz."
+  pay-sent: "&a{player} &7adlı oyuncuya &e{amount} &7gönderildi."
+  pay-received: "&e{player} &7adlı oyuncudan &a{amount} &7para transferi aldınız."
+
+  # Çiftçi Mesajları
+  farmer-summoned: "&aÇiftçi Köylüsü yanınıza başarıyla çağrıldı!"
+  farmer-sold-all: "&6★ &aTebrikler! Çiftçideki tüm ürünler satıldı ve &e{amount} &abakiyenize eklendi."
+  farmer-sold-item: "&a{item} &7ürünü satıldı ve &e{amount} &abakiyenize aktarıldı."
+  farmer-empty: "&cÇiftçi deposunda satılacak ürün bulunmuyor."
+  farmer-not-unlocked: "&cÇiftçinizi henüz satın almadınız! Satın almak için: &e/ciftci"
+  farmer-bought-success: "&6★ &aTebrikler! &e{amount} &akarşılığında ada çiftçinizi başarıyla satın aldınız!"
+  farmer-buy-cancelled: "&cÇiftçi satın alma işlemi iptal edildi."
+
+  # Market Mesajları
+  market-bought-success: "&aBaşarıyla &e{amount}x {item} &7satın aldınız. (&6{cost}&7)"
+  market-insufficient-funds: "&cBu satın alım için bakiyeniz yetersiz! Gerekli: &e{cost}"
+  market-inventory-full: "&cEnvanteriniz dolu olduğu için bu eşyayı satın alamazsınız!"
+
+  # Bilgi Mesajları
+  info-header: "&6===== &e&lTekBlok Ada Bilgileri &6====="
+  info-phase: "&7Mevcut Aşama: &eAşama {phase_id} &7- {phase_name}"
+  info-blocks: "&7Kırılan Blok: &a{broken} &7/ &b{required}"
+  info-remaining: "&7Sonraki Aşama İçin Kalan: &c{remaining} blok"
+  info-footer: "&6====================================="
+
+  # Yardım Menüsü
+  help-header: "&6===== &e&lTekBlok Ada Komutları (/ada) &6====="
+  help-menu: "&e/ada &7- Ada menüsünü ve aşamalar rehberini açar"
+  help-go: "&e/ada git &7- Adanıza ışınlanmanızı sağlar"
+  help-info: "&e/ada bilgi &7- Aşama ve blok ilerlemenizi gösterir"
+  help-spawn: "&e/spawn &7- Lobi / Başlangıç noktasına ışınlar"
+  help-farmer: "&e/ciftci &7- Ada çiftçisi deposunu ve satış menüsünü açar"
+  help-market: "&e/market &7- Tohum, et, yün, maden ve kasa anahtarları marketini açar"
+  help-trade: "&e/takas <oyuncu> &7- Güvenli ve buton onaylı eşya takası açar"
+  help-balance: "&e/para [gonder <oyuncu> <miktar>] &7- Bakiye işlemleri"
+  help-invite: "&e/ada davet <oyuncu> &7- Adanıza arkadaş davet eder"
+  help-accept: "&e/ada kabul &7- Gelen ada davetini onaylar"
+  help-deny: "&e/ada reddet &7- Gelen ada davetini reddeder"
+  help-visit: "&e/ada ziyaret <oyuncu> &7- Bir oyuncunun adasını ziyaret eder"
+  help-top: "&e/ada top &7- En çok blok kıranları listeler"
+  help-reset: "&e/ada sifirla &7- Adanızı sıfırlar"
+  help-delete: "&e/ada sil &7- Adanızı onaylayarak kalıcı olarak siler"
+  help-footer: "&6====================================="

@@ -1,0 +1,393 @@
+# =======================================================
+#               TEKBLOK OYUN İÇİ MARKET
+#            Minecraft 1.16.1 - Zorlu Satın Alma Pazarı
+# =======================================================
+# Satın alma fiyatları zorlayıcı ve dengelidir.
+
+categories:
+  bloklar:
+    name: "&7&lİnşaat & Blok Pazarı"
+    icon: STONE_BRICKS
+    slot: 10
+    description: "Temel yapı taşları, camlar, buzlar ve kovalar"
+    items:
+      COBBLESTONE:
+        name: "&7Kırıktaş"
+        price: 1.0
+      STONE:
+        name: "&7Taş"
+        price: 1.5
+      SMOOTH_STONE:
+        name: "&fPürüzsüz Taş"
+        price: 2.0
+      STONE_BRICKS:
+        name: "&7Taş Tuğla"
+        price: 2.5
+      BRICKS:
+        name: "&cTuğla Bloğu"
+        price: 4.0
+      GLASS:
+        name: "&fCam"
+        price: 2.0
+      SAND:
+        name: "&eKum"
+        price: 1.5
+      GRAVEL:
+        name: "&7Çakıl"
+        price: 1.25
+      DIRT:
+        name: "&6Toprak"
+        price: 1.0
+      GRASS_BLOCK:
+        name: "&aÇimenli Toprak"
+        price: 2.0
+      QUARTZ_BLOCK:
+        name: "&fNether Kuvars Bloğu"
+        price: 10.0
+      PRISMARINE:
+        name: "&3Prizmarin"
+        price: 7.5
+      PRISMARINE_BRICKS:
+        name: "&3Prizmarin Tuğlası"
+        price: 10.0
+      DARK_PRISMARINE:
+        name: "&1Koyu Prizmarin"
+        price: 12.5
+      SEA_LANTERN:
+        name: "&bDeniz Feneri"
+        price: 17.5
+      GLOWSTONE:
+        name: "&eIşık Taşı"
+        price: 15.0
+      PACKED_ICE:
+        name: "&bPaketlenmiş Buz"
+        price: 10.0
+      BLUE_ICE:
+        name: "&1Mavi Buz"
+        price: 30.0
+      OBSIDIAN:
+        name: "&5Obsidyen"
+        price: 25.0
+      CRYING_OBSIDIAN:
+        name: "&dAğlayan Obsidyen"
+        price: 40.0
+      WATER_BUCKET:
+        name: "&9Su Kovası"
+        price: 37.5
+      LAVA_BUCKET:
+        name: "&cLav Kovası"
+        price: 125.0
+
+  tarim:
+    name: "&6&lTarım & Tohum Pazarı"
+    icon: WHEAT
+    slot: 11
+    description: "Tohumlar, fidanlar ve tarımsal mahsuller"
+    items:
+      WHEAT_SEEDS:
+        name: "&aBuğday Tohumu"
+        price: 2.5
+      BEETROOT_SEEDS:
+        name: "&aPancar Tohumu"
+        price: 3.0
+      MELON_SEEDS:
+        name: "&aKarpuz Tohumu"
+        price: 7.5
+      PUMPKIN_SEEDS:
+        name: "&aBalkabağı Tohumu"
+        price: 7.5
+      CARROT:
+        name: "&aHavuç"
+        price: 5.0
+      POTATO:
+        name: "&aPatates"
+        price: 5.0
+      SUGAR_CANE:
+        name: "&aŞeker Kamışı"
+        price: 6.0
+      CACTUS:
+        name: "&aKaktüs"
+        price: 5.0
+      BAMBOO:
+        name: "&aBambu"
+        price: 4.0
+      COCOA_BEANS:
+        name: "&aKakao Çekirdeği"
+        price: 7.5
+      NETHER_WART:
+        name: "&cNether Yumrusu"
+        price: 12.5
+      SWEET_BERRIES:
+        name: "&cTatlı Orman Meyvesi"
+        price: 4.0
+      WHEAT:
+        name: "&eBuğday"
+        price: 4.0
+      HAY_BLOCK:
+        name: "&eSaman Balyası"
+        price: 35.0
+      MELON:
+        name: "&aKarpuz Bloğu"
+        price: 15.0
+      PUMPKIN:
+        name: "&6Balkabağı"
+        price: 12.5
+      OAK_SAPLING:
+        name: "&2Meşe Fidanı"
+        price: 5.0
+      SPRUCE_SAPLING:
+        name: "&2Ladin Fidanı"
+        price: 5.0
+      BIRCH_SAPLING:
+        name: "&fHuş Fidanı"
+        price: 5.0
+      JUNGLE_SAPLING:
+        name: "&2Orman Ağacı Fidanı"
+        price: 7.5
+      ACACIA_SAPLING:
+        name: "&6Akasya Fidanı"
+        price: 5.0
+      DARK_OAK_SAPLING:
+        name: "&8Koyu Meşe Fidanı"
+        price: 7.5
+
+  yiyecek:
+    name: "&c&lEt & Yiyecek Pazarı"
+    icon: COOKED_BEEF
+    slot: 12
+    description: "Pişmiş etler, ekmek, altın elma ve yiyecekler"
+    items:
+      COOKED_BEEF:
+        name: "&cPişmiş Biftek"
+        price: 7.5
+      BEEF:
+        name: "&cÇiğ Biftek"
+        price: 4.0
+      COOKED_PORKCHOP:
+        name: "&dPişmiş Domuz Pirzolası"
+        price: 7.0
+      PORKCHOP:
+        name: "&dÇiğ Domuz Pirzolası"
+        price: 3.5
+      COOKED_MUTTON:
+        name: "&ePişmiş Koyun Eti"
+        price: 6.0
+      MUTTON:
+        name: "&eÇiğ Koyun Eti"
+        price: 3.0
+      COOKED_CHICKEN:
+        name: "&fPişmiş Tavuk Eti"
+        price: 5.0
+      CHICKEN:
+        name: "&fÇiğ Tavuk Eti"
+        price: 2.5
+      COOKED_COD:
+        name: "&bPişmiş Morina Balığı"
+        price: 5.0
+      COOKED_SALMON:
+        name: "&cPişmiş Somon Balığı"
+        price: 6.0
+      BREAD:
+        name: "&eEkmek"
+        price: 4.0
+      APPLE:
+        name: "&cElma"
+        price: 5.0
+      GOLDEN_APPLE:
+        name: "&6Altın Elma"
+        price: 75.0
+      ENCHANTED_GOLDEN_APPLE:
+        name: "&d&lBüyülü Altın Elma"
+        price: 750.0
+      GOLDEN_CARROT:
+        name: "&6Altın Havuç"
+        price: 30.0
+      BAKED_POTATO:
+        name: "&eFırınlanmış Patates"
+        price: 4.0
+      MUSHROOM_STEW:
+        name: "&cMantar Yahnisi"
+        price: 7.5
+
+  yunler:
+    name: "&f&lYün & Renkli Blok Pazarı"
+    icon: WHITE_WOOL
+    slot: 13
+    description: "Tüm 16 renk yün ve dekoratif tekstil ürünleri"
+    items:
+      WHITE_WOOL:
+        name: "&fBeyaz Yün"
+        price: 4.0
+      ORANGE_WOOL:
+        name: "&6Turuncu Yün"
+        price: 4.0
+      MAGENTA_WOOL:
+        name: "&dEflatun Yün"
+        price: 4.0
+      LIGHT_BLUE_WOOL:
+        name: "&bAçık Mavi Yün"
+        price: 4.0
+      YELLOW_WOOL:
+        name: "&eSarı Yün"
+        price: 4.0
+      LIME_WOOL:
+        name: "&aAçık Yeşil Yün"
+        price: 4.0
+      PINK_WOOL:
+        name: "&dPembe Yün"
+        price: 4.0
+      GRAY_WOOL:
+        name: "&8Gri Yün"
+        price: 4.0
+      LIGHT_GRAY_WOOL:
+        name: "&7Açık Gri Yün"
+        price: 4.0
+      CYAN_WOOL:
+        name: "&3Camgöbeği Yün"
+        price: 4.0
+      PURPLE_WOOL:
+        name: "&5Mor Yün"
+        price: 4.0
+      BLUE_WOOL:
+        name: "&1Mavi Yün"
+        price: 4.0
+      BROWN_WOOL:
+        name: "&6Kahverengi Yün"
+        price: 4.0
+      GREEN_WOOL:
+        name: "&2Yeşil Yün"
+        price: 4.0
+      RED_WOOL:
+        name: "&cKırmızı Yün"
+        price: 4.0
+      BLACK_WOOL:
+        name: "&0Siyah Yün"
+        price: 4.0
+
+  madenler:
+    name: "&b&lMaden & Cevher Pazarı"
+    icon: DIAMOND
+    slot: 14
+    description: "Kömür, demir, altın, elmas, netherit ve bloklar"
+    items:
+      COAL:
+        name: "&8Kömür"
+        price: 5.0
+      CHARCOAL:
+        name: "&8Odun Kömürü"
+        price: 4.0
+      IRON_INGOT:
+        name: "&fDemir Külçesi"
+        price: 17.5
+      GOLD_INGOT:
+        name: "&eAltın Külçesi"
+        price: 30.0
+      REDSTONE:
+        name: "&cKızıltaş"
+        price: 5.0
+      LAPIS_LAZULI:
+        name: "&9Lapis Lazuli"
+        price: 6.0
+      DIAMOND:
+        name: "&bElmas"
+        price: 125.0
+      EMERALD:
+        name: "&aZümrüt"
+        price: 75.0
+      QUARTZ:
+        name: "&fNether Kuvarsı"
+        price: 7.5
+      NETHERITE_SCRAP:
+        name: "&4Netherit Parçası"
+        price: 600.0
+      NETHERITE_INGOT:
+        name: "&4&lNetherit Külçesi"
+        price: 2500.0
+      IRON_BLOCK:
+        name: "&fDemir Bloğu"
+        price: 155.0
+      GOLD_BLOCK:
+        name: "&eAltın Bloğu"
+        price: 265.0
+      DIAMOND_BLOCK:
+        name: "&bElmas Bloğu"
+        price: 1100.0
+      EMERALD_BLOCK:
+        name: "&aZümrüt Bloğu"
+        price: 650.0
+
+  canavarlar:
+    name: "&2&lCanavar & Avcı Pazarı"
+    icon: ROTTEN_FLESH
+    slot: 15
+    description: "Canavar ganimetleri, barut, ender incisi ve avcı eşyaları"
+    items:
+      ROTTEN_FLESH:
+        name: "&2Çürük Et"
+        price: 2.5
+      BONE:
+        name: "&fKemik"
+        price: 4.0
+      STRING:
+        name: "&fİp"
+        price: 5.0
+      SPIDER_EYE:
+        name: "&cÖrümcek Gözü"
+        price: 6.0
+      GUNPOWDER:
+        name: "&7Barut"
+        price: 10.0
+      ENDER_PEARL:
+        name: "&3Ender İncisi"
+        price: 25.0
+      BLAZE_ROD:
+        name: "&6Blaze Çubuğu"
+        price: 30.0
+      GHAST_TEAR:
+        name: "&fGhast Gözyaşı"
+        price: 60.0
+      SLIME_BALL:
+        name: "&aBalçık Topu"
+        price: 17.5
+      MAGMA_CREAM:
+        name: "&6Magma Kremi"
+        price: 20.0
+      FEATHER:
+        name: "&fTüy"
+        price: 2.5
+      LEATHER:
+        name: "&6Deri"
+        price: 7.5
+      INK_SAC:
+        name: "&0Mürekkep Kesesi"
+        price: 5.0
+      ARROW:
+        name: "&7Ok"
+        price: 2.5
+
+  kasalar:
+    name: "&5&lKasa Anahtarları Pazarı"
+    icon: TRIPWIRE_HOOK
+    slot: 16
+    description: "Spawn'daki gizemli kasaları açmak için anahtarlar"
+    items:
+      CIRAK_KEY:
+        name: "&a&lÇırak Kasa Anahtarı"
+        price: 250.0
+        crate: "cirak"
+      MADEN_KEY:
+        name: "&b&lMaden Kasa Anahtarı"
+        price: 1000.0
+        crate: "maden"
+      SAVASCI_KEY:
+        name: "&c&lSavaşçı Kasa Anahtarı"
+        price: 2500.0
+        crate: "savasci"
+      EFSANEVI_KEY:
+        name: "&6&l★ Efsanevi Kasa Anahtarı ★"
+        price: 9000.0
+        crate: "efsanevi"
+      SPAWNER_KEY:
+        name: "&d&l★ Spawner Kasa Anahtarı ★"
+        price: 12500.0
+        crate: "spawner"

@@ -1,0 +1,1016 @@
+# =======================================================
+#               TEKBLOK ASAMA (PHASE) HAVUZU
+#            Minecraft 1.16.1 - 7 Sade & Dengeli Asama
+# =======================================================
+
+phases:
+  1:
+    name: "&aOva & Orman Diyari"
+    biome: PLAINS
+    required-blocks: 350
+    bar-color: GREEN
+    bar-style: SOLID
+    icon: GRASS_BLOCK
+    chest-chance: 0.03
+    mob-chance: 0.015
+    blocks:
+      - material: GRASS_BLOCK
+        weight: 40
+      - material: DIRT
+        weight: 25
+      - material: COARSE_DIRT
+        weight: 10
+      - material: OAK_LOG
+        weight: 18
+      - material: BIRCH_LOG
+        weight: 14
+      - material: OAK_LEAVES
+        weight: 12
+      - material: BIRCH_LEAVES
+        weight: 10
+      - material: CLAY
+        weight: 8
+      - material: GRAVEL
+        weight: 8
+      - material: COAL_ORE
+        weight: 20
+      - material: IRON_ORE
+        weight: 16
+      - material: LAPIS_ORE
+        weight: 8
+      - material: REDSTONE_ORE
+        weight: 8
+      - material: GOLD_ORE
+        weight: 7
+      - material: DIAMOND_ORE
+        weight: 4
+      - material: EMERALD_ORE
+        weight: 3
+      - material: NETHER_QUARTZ_ORE
+        weight: 6
+      - material: NETHER_GOLD_ORE
+        weight: 6
+      - material: ANCIENT_DEBRIS
+        weight: 2
+    chests:
+      - weight: 20
+        items:
+          - material: OAK_SAPLING
+            amount: 3
+          - material: BIRCH_SAPLING
+            amount: 3
+          - material: WHEAT_SEEDS
+            amount: 6
+          - material: BONE_MEAL
+            amount: 8
+          - material: BREAD
+            amount: 6
+          - material: APPLE
+            amount: 4
+      - weight: 18
+        items:
+          - material: IRON_PICKAXE
+            amount: 1
+          - material: IRON_INGOT
+            amount: 4
+          - material: TORCH
+            amount: 12
+          - material: COAL
+            amount: 8
+      - weight: 16
+        items:
+          - material: CARROT
+            amount: 4
+          - material: POTATO
+            amount: 4
+          - material: PUMPKIN_SEEDS
+            amount: 3
+          - material: MELON_SEEDS
+            amount: 3
+          - material: WATER_BUCKET
+            amount: 1
+      - weight: 14
+        items:
+          - material: BOW
+            amount: 1
+          - material: ARROW
+            amount: 16
+          - material: LEATHER
+            amount: 6
+          - material: COOKED_BEEF
+            amount: 6
+      - weight: 12
+        items:
+          - material: DIAMOND
+            amount: 2
+          - material: GOLD_INGOT
+            amount: 5
+          - material: GOLDEN_APPLE
+            amount: 2
+      - weight: 10
+        items:
+          - material: LEAD
+            amount: 2
+          - material: SADDLE
+            amount: 1
+          - material: SHEARS
+            amount: 1
+          - material: NAME_TAG
+            amount: 1
+          - material: COW_SPAWN_EGG
+            amount: 1
+      - weight: 10
+        items:
+          - material: BOOK
+            amount: 3
+          - material: LAPIS_LAZULI
+            amount: 8
+          - material: EXPERIENCE_BOTTLE
+            amount: 4
+    mobs:
+      - type: COW
+        weight: 25
+        name: "&aSevimli Inek"
+        baby: false
+      - type: SHEEP
+        weight: 25
+        name: "&fBeyaz Koyun"
+        baby: false
+      - type: CHICKEN
+        weight: 20
+        name: "&eTavuk"
+        baby: false
+      - type: PIG
+        weight: 20
+        name: "&dDomuz"
+        baby: false
+      - type: HORSE
+        weight: 10
+        name: "&6Ova Ati"
+        baby: false
+
+  2:
+    name: "&7Yeralti Magarasi"
+    biome: MOUNTAINS
+    required-blocks: 900
+    bar-color: WHITE
+    bar-style: SOLID
+    icon: STONE
+    chest-chance: 0.03
+    mob-chance: 0.015
+    blocks:
+      - material: STONE
+        weight: 35
+      - material: COBBLESTONE
+        weight: 25
+      - material: ANDESITE
+        weight: 15
+      - material: DIORITE
+        weight: 12
+      - material: GRANITE
+        weight: 12
+      - material: MOSSY_COBBLESTONE
+        weight: 8
+      - material: GRAVEL
+        weight: 8
+      - material: COAL_ORE
+        weight: 26
+      - material: IRON_ORE
+        weight: 22
+      - material: LAPIS_ORE
+        weight: 12
+      - material: REDSTONE_ORE
+        weight: 12
+      - material: GOLD_ORE
+        weight: 10
+      - material: DIAMOND_ORE
+        weight: 6
+      - material: EMERALD_ORE
+        weight: 5
+      - material: NETHER_QUARTZ_ORE
+        weight: 8
+      - material: NETHER_GOLD_ORE
+        weight: 8
+      - material: ANCIENT_DEBRIS
+        weight: 3
+    chests:
+      - weight: 20
+        items:
+          - material: DIAMOND_PICKAXE
+            amount: 1
+          - material: TORCH
+            amount: 24
+          - material: COAL_BLOCK
+            amount: 2
+      - weight: 18
+        items:
+          - material: IRON_HELMET
+            amount: 1
+          - material: IRON_CHESTPLATE
+            amount: 1
+          - material: IRON_LEGGINGS
+            amount: 1
+          - material: IRON_BOOTS
+            amount: 1
+          - material: SHIELD
+            amount: 1
+      - weight: 16
+        items:
+          - material: REDSTONE
+            amount: 16
+          - material: REDSTONE_TORCH
+            amount: 4
+          - material: REPEATER
+            amount: 2
+          - material: PISTON
+            amount: 2
+          - material: TNT
+            amount: 3
+      - weight: 14
+        items:
+          - material: RAIL
+            amount: 16
+          - material: POWERED_RAIL
+            amount: 6
+          - material: MINECART
+            amount: 1
+          - material: CHEST_MINECART
+            amount: 1
+      - weight: 12
+        items:
+          - material: DIAMOND
+            amount: 4
+          - material: EMERALD
+            amount: 6
+          - material: GOLD_BLOCK
+            amount: 1
+          - material: GOLDEN_APPLE
+            amount: 2
+      - weight: 10
+        items:
+          - material: SKELETON_SPAWN_EGG
+            amount: 1
+          - material: ZOMBIE_SPAWN_EGG
+            amount: 1
+          - material: SPIDER_EYE
+            amount: 4
+          - material: GUNPOWDER
+            amount: 8
+      - weight: 10
+        items:
+          - material: BOOKSHELF
+            amount: 3
+          - material: LAPIS_BLOCK
+            amount: 2
+          - material: EXPERIENCE_BOTTLE
+            amount: 8
+    mobs:
+      - type: ZOMBIE
+        weight: 30
+        name: "&2Magara Zombisi"
+        baby: false
+      - type: SKELETON
+        weight: 25
+        name: "&7Iskelet Okcu"
+        baby: false
+      - type: SPIDER
+        weight: 20
+        name: "&8Karanlik Orumcek"
+        baby: false
+      - type: CREEPER
+        weight: 15
+        name: "&aSinsi Creeper"
+        baby: false
+      - type: BAT
+        weight: 10
+        name: "&8Yarasa"
+        baby: false
+
+  3:
+    name: "&bKarli Tayga & Col"
+    biome: SNOWY_TAIGA
+    required-blocks: 1800
+    bar-color: BLUE
+    bar-style: SOLID
+    icon: PACKED_ICE
+    chest-chance: 0.03
+    mob-chance: 0.015
+    blocks:
+      - material: SNOW_BLOCK
+        weight: 20
+      - material: PACKED_ICE
+        weight: 12
+      - material: BLUE_ICE
+        weight: 8
+      - material: SPRUCE_LOG
+        weight: 16
+      - material: SPRUCE_LEAVES
+        weight: 10
+      - material: SAND
+        weight: 20
+      - material: RED_SAND
+        weight: 12
+      - material: SANDSTONE
+        weight: 10
+      - material: CACTUS
+        weight: 8
+      - material: TERRACOTTA
+        weight: 10
+      - material: COAL_ORE
+        weight: 20
+      - material: IRON_ORE
+        weight: 18
+      - material: LAPIS_ORE
+        weight: 10
+      - material: REDSTONE_ORE
+        weight: 10
+      - material: GOLD_ORE
+        weight: 12
+      - material: DIAMOND_ORE
+        weight: 7
+      - material: EMERALD_ORE
+        weight: 5
+      - material: NETHER_QUARTZ_ORE
+        weight: 8
+      - material: NETHER_GOLD_ORE
+        weight: 8
+      - material: ANCIENT_DEBRIS
+        weight: 3
+    chests:
+      - weight: 20
+        items:
+          - material: GOLD_INGOT
+            amount: 12
+          - material: EMERALD
+            amount: 6
+          - material: DIAMOND
+            amount: 3
+          - material: ENCHANTED_GOLDEN_APPLE
+            amount: 1
+          - material: SADDLE
+            amount: 1
+      - weight: 18
+        items:
+          - material: SPRUCE_SAPLING
+            amount: 4
+          - material: SWEET_BERRIES
+            amount: 12
+          - material: CAMPFIRE
+            amount: 2
+          - material: RABBIT_FOOT
+            amount: 2
+          - material: COOKED_RABBIT
+            amount: 6
+      - weight: 16
+        items:
+          - material: GLASS
+            amount: 16
+          - material: RED_SANDSTONE
+            amount: 16
+          - material: TERRACOTTA
+            amount: 16
+          - material: SEA_LANTERN
+            amount: 4
+      - weight: 14
+        items:
+          - material: DIAMOND_SHOVEL
+            amount: 1
+          - material: SNOWBALL
+            amount: 16
+          - material: ICE
+            amount: 8
+          - material: LEATHER_BOOTS
+            amount: 1
+      - weight: 12
+        items:
+          - material: CREEPER_SPAWN_EGG
+            amount: 1
+          - material: GUNPOWDER
+            amount: 12
+          - material: STRING
+            amount: 8
+          - material: ARROW
+            amount: 24
+      - weight: 10
+        items:
+          - material: CACTUS
+            amount: 6
+          - material: DEAD_BUSH
+            amount: 2
+          - material: BEETROOT_SEEDS
+            amount: 6
+          - material: GOLDEN_CARROT
+            amount: 8
+      - weight: 10
+        items:
+          - material: ANVIL
+            amount: 1
+          - material: LAPIS_LAZULI
+            amount: 16
+          - material: EXPERIENCE_BOTTLE
+            amount: 10
+    mobs:
+      - type: POLAR_BEAR
+        weight: 25
+        name: "&fKutup Ayisi"
+        baby: false
+      - type: WOLF
+        weight: 25
+        name: "&fKurt"
+        baby: false
+      - type: FOX
+        weight: 20
+        name: "&6Kar Tilkisi"
+        baby: false
+      - type: RABBIT
+        weight: 15
+        name: "&eCol Tavsani"
+        baby: false
+      - type: HUSK
+        weight: 15
+        name: "&6Col Zombisi"
+        baby: false
+
+  4:
+    name: "&3Okyanus & Vahsi Doga"
+    biome: JUNGLE
+    required-blocks: 3000
+    bar-color: YELLOW
+    bar-style: SOLID
+    icon: PRISMARINE
+    chest-chance: 0.03
+    mob-chance: 0.015
+    blocks:
+      - material: JUNGLE_LOG
+        weight: 18
+      - material: JUNGLE_LEAVES
+        weight: 12
+      - material: BAMBOO
+        weight: 14
+      - material: MELON
+        weight: 10
+      - material: PRISMARINE
+        weight: 16
+      - material: PRISMARINE_BRICKS
+        weight: 12
+      - material: DARK_PRISMARINE
+        weight: 10
+      - material: SEA_LANTERN
+        weight: 10
+      - material: SPONGE
+        weight: 5
+      - material: SLIME_BLOCK
+        weight: 6
+      - material: HONEY_BLOCK
+        weight: 6
+      - material: COAL_ORE
+        weight: 18
+      - material: IRON_ORE
+        weight: 18
+      - material: LAPIS_ORE
+        weight: 12
+      - material: REDSTONE_ORE
+        weight: 12
+      - material: GOLD_ORE
+        weight: 12
+      - material: DIAMOND_ORE
+        weight: 8
+      - material: EMERALD_ORE
+        weight: 6
+      - material: NETHER_QUARTZ_ORE
+        weight: 10
+      - material: NETHER_GOLD_ORE
+        weight: 10
+      - material: ANCIENT_DEBRIS
+        weight: 4
+    chests:
+      - weight: 20
+        items:
+          - material: HEART_OF_THE_SEA
+            amount: 1
+          - material: NAUTILUS_SHELL
+            amount: 3
+          - material: PRISMARINE_SHARD
+            amount: 12
+          - material: PRISMARINE_CRYSTALS
+            amount: 8
+      - weight: 18
+        items:
+          - material: JUNGLE_SAPLING
+            amount: 4
+          - material: COCOA_BEANS
+            amount: 8
+          - material: BAMBOO
+            amount: 16
+          - material: COOKIE
+            amount: 12
+          - material: SLIME_BALL
+            amount: 8
+      - weight: 16
+        items:
+          - material: BEE_SPAWN_EGG
+            amount: 2
+          - material: HONEY_BOTTLE
+            amount: 4
+          - material: HONEYCOMB
+            amount: 6
+          - material: BEEHIVE
+            amount: 1
+      - weight: 14
+        items:
+          - material: TRIDENT
+            amount: 1
+          - material: PRISMARINE
+            amount: 16
+          - material: SEA_LANTERN
+            amount: 6
+          - material: TURTLE_EGG
+            amount: 2
+      - weight: 12
+        items:
+          - material: MUSIC_DISC_CAT
+            amount: 1
+          - material: JUKEBOX
+            amount: 1
+          - material: FIREWORK_ROCKET
+            amount: 16
+          - material: PARROT_SPAWN_EGG
+            amount: 1
+      - weight: 10
+        items:
+          - material: CONDUIT
+            amount: 1
+          - material: DIAMOND_BLOCK
+            amount: 1
+          - material: EMERALD
+            amount: 8
+          - material: GOLDEN_APPLE
+            amount: 4
+      - weight: 10
+        items:
+          - material: BREWING_STAND
+            amount: 1
+          - material: GLISTERING_MELON_SLICE
+            amount: 4
+          - material: GHAST_TEAR
+            amount: 2
+          - material: EXPERIENCE_BOTTLE
+            amount: 12
+    mobs:
+      - type: PARROT
+        weight: 25
+        name: "&cRenkli Papagan"
+        baby: false
+      - type: OCELOT
+        weight: 25
+        name: "&eOselo"
+        baby: false
+      - type: PANDA
+        weight: 20
+        name: "&fSevimli Panda"
+        baby: false
+      - type: DOLPHIN
+        weight: 15
+        name: "&bYunus Baligi"
+        baby: false
+      - type: DROWNED
+        weight: 15
+        name: "&3Bogulmus"
+        baby: false
+
+  5:
+    name: "&cNether Boyutu"
+    biome: NETHER_WASTES
+    required-blocks: 4800
+    bar-color: RED
+    bar-style: SOLID
+    icon: NETHERRACK
+    chest-chance: 0.03
+    mob-chance: 0.015
+    blocks:
+      - material: NETHERRACK
+        weight: 25
+      - material: SOUL_SAND
+        weight: 12
+      - material: SOUL_SOIL
+        weight: 10
+      - material: BASALT
+        weight: 12
+      - material: POLISHED_BASALT
+        weight: 8
+      - material: BLACKSTONE
+        weight: 12
+      - material: POLISHED_BLACKSTONE
+        weight: 8
+      - material: GLOWSTONE
+        weight: 10
+      - material: MAGMA_BLOCK
+        weight: 10
+      - material: CRYING_OBSIDIAN
+        weight: 6
+      - material: OBSIDIAN
+        weight: 8
+      - material: CRIMSON_STEM
+        weight: 10
+      - material: WARPED_STEM
+        weight: 10
+      - material: CRIMSON_NYLIUM
+        weight: 8
+      - material: WARPED_NYLIUM
+        weight: 8
+      - material: NETHER_WART_BLOCK
+        weight: 6
+      - material: SHROOMLIGHT
+        weight: 6
+      - material: BONE_BLOCK
+        weight: 6
+      - material: ANCIENT_DEBRIS
+        weight: 7
+      - material: NETHER_QUARTZ_ORE
+        weight: 18
+      - material: NETHER_GOLD_ORE
+        weight: 16
+      - material: GOLD_ORE
+        weight: 14
+      - material: DIAMOND_ORE
+        weight: 10
+      - material: EMERALD_ORE
+        weight: 6
+      - material: IRON_ORE
+        weight: 16
+      - material: COAL_ORE
+        weight: 14
+      - material: REDSTONE_ORE
+        weight: 10
+      - material: LAPIS_ORE
+        weight: 10
+    chests:
+      - weight: 20
+        items:
+          - material: NETHERITE_SCRAP
+            amount: 2
+          - material: NETHERITE_INGOT
+            amount: 1
+          - material: ANCIENT_DEBRIS
+            amount: 2
+          - material: DIAMOND
+            amount: 4
+      - weight: 18
+        items:
+          - material: BREWING_STAND
+            amount: 1
+          - material: BLAZE_ROD
+            amount: 6
+          - material: NETHER_WART
+            amount: 8
+          - material: GHAST_TEAR
+            amount: 3
+          - material: MAGMA_CREAM
+            amount: 6
+      - weight: 16
+        items:
+          - material: GOLD_BLOCK
+            amount: 2
+          - material: GOLD_INGOT
+            amount: 16
+          - material: ENDER_PEARL
+            amount: 8
+          - material: CRYING_OBSIDIAN
+            amount: 4
+          - material: FIRE_CHARGE
+            amount: 6
+      - weight: 14
+        items:
+          - material: WITHER_SKELETON_SKULL
+            amount: 1
+          - material: SOUL_SAND
+            amount: 8
+          - material: BONE
+            amount: 16
+          - material: COAL_BLOCK
+            amount: 3
+      - weight: 12
+        items:
+          - material: NETHERITE_SWORD
+            amount: 1
+          - material: BOW
+            amount: 1
+          - material: ARROW
+            amount: 32
+          - material: GOLDEN_APPLE
+            amount: 4
+      - weight: 10
+        items:
+          - material: CRIMSON_FUNGUS
+            amount: 4
+          - material: WARPED_FUNGUS
+            amount: 4
+          - material: SHROOMLIGHT
+            amount: 6
+          - material: WEEPING_VINES
+            amount: 8
+      - weight: 10
+        items:
+          - material: RESPAWN_ANCHOR
+            amount: 1
+          - material: GLOWSTONE
+            amount: 16
+          - material: OBSIDIAN
+            amount: 10
+          - material: EXPERIENCE_BOTTLE
+            amount: 16
+    mobs:
+      - type: PIGLIN
+        weight: 20
+        name: "&6Piglin Savascisi"
+        baby: false
+      - type: ZOMBIFIED_PIGLIN
+        weight: 20
+        name: "&dZombi Piglin"
+        baby: false
+      - type: BLAZE
+        weight: 15
+        name: "&eAtes Canavari (Blaze)"
+        baby: false
+      - type: MAGMA_CUBE
+        weight: 15
+        name: "&cMagma Kupu"
+        baby: false
+      - type: GHAST
+        weight: 10
+        name: "&fNether Ghasti"
+        baby: false
+      - type: WITHER_SKELETON
+        weight: 12
+        name: "&8Wither Savascisi"
+        baby: false
+      - type: STRIDER
+        weight: 8
+        name: "&cLav Kosucusu"
+        baby: false
+
+  6:
+    name: "&dEnd Boyutu"
+    biome: THE_END
+    required-blocks: 7000
+    bar-color: PURPLE
+    bar-style: SOLID
+    icon: END_STONE
+    chest-chance: 0.03
+    mob-chance: 0.015
+    blocks:
+      - material: END_STONE
+        weight: 35
+      - material: END_STONE_BRICKS
+        weight: 20
+      - material: PURPUR_BLOCK
+        weight: 15
+      - material: PURPUR_PILLAR
+        weight: 10
+      - material: OBSIDIAN
+        weight: 10
+      - material: END_ROD
+        weight: 8
+      - material: CHORUS_PLANT
+        weight: 8
+      - material: CHORUS_FLOWER
+        weight: 6
+      - material: ANCIENT_DEBRIS
+        weight: 8
+      - material: DIAMOND_ORE
+        weight: 14
+      - material: EMERALD_ORE
+        weight: 10
+      - material: NETHER_QUARTZ_ORE
+        weight: 10
+      - material: NETHER_GOLD_ORE
+        weight: 10
+      - material: GOLD_ORE
+        weight: 12
+      - material: IRON_ORE
+        weight: 16
+      - material: COAL_ORE
+        weight: 14
+      - material: REDSTONE_ORE
+        weight: 10
+      - material: LAPIS_ORE
+        weight: 10
+    chests:
+      - weight: 20
+        items:
+          - material: DRAGON_BREATH
+            amount: 4
+          - material: ENDER_EYE
+            amount: 6
+          - material: ENDER_PEARL
+            amount: 12
+          - material: OBSIDIAN
+            amount: 8
+      - weight: 18
+        items:
+          - material: ELYTRA
+            amount: 1
+          - material: FIREWORK_ROCKET
+            amount: 32
+          - material: PHANTOM_MEMBRANE
+            amount: 6
+      - weight: 16
+        items:
+          - material: SHULKER_SHELL
+            amount: 4
+          - material: CHEST
+            amount: 4
+          - material: DIAMOND
+            amount: 6
+      - weight: 14
+        items:
+          - material: DIAMOND_BLOCK
+            amount: 2
+          - material: EMERALD_BLOCK
+            amount: 2
+          - material: NETHERITE_INGOT
+            amount: 1
+          - material: ENCHANTED_GOLDEN_APPLE
+            amount: 2
+      - weight: 12
+        items:
+          - material: END_CRYSTAL
+            amount: 2
+          - material: GHAST_TEAR
+            amount: 4
+          - material: ENDER_EYE
+            amount: 4
+          - material: GLASS
+            amount: 16
+      - weight: 10
+        items:
+          - material: CHORUS_FRUIT
+            amount: 16
+          - material: CHORUS_FLOWER
+            amount: 4
+          - material: END_ROD
+            amount: 8
+          - material: PURPUR_BLOCK
+            amount: 16
+      - weight: 10
+        items:
+          - material: DIAMOND_CHESTPLATE
+            amount: 1
+          - material: TOTEM_OF_UNDYING
+            amount: 1
+          - material: EXPERIENCE_BOTTLE
+            amount: 20
+    mobs:
+      - type: ENDERMAN
+        weight: 40
+        name: "&5Enderman"
+        baby: false
+      - type: SHULKER
+        weight: 30
+        name: "&dShulker"
+        baby: false
+      - type: ENDERMITE
+        weight: 30
+        name: "&5Endermite"
+        baby: false
+
+  7:
+    name: "&6&lSonsuzluk & Nihai Hazine"
+    biome: PLAINS
+    required-blocks: 999999
+    bar-color: PINK
+    bar-style: SOLID
+    icon: NETHERITE_BLOCK
+    chest-chance: 0.035
+    mob-chance: 0.015
+    blocks:
+      - material: DIAMOND_BLOCK
+        weight: 8
+      - material: EMERALD_BLOCK
+        weight: 8
+      - material: NETHERITE_BLOCK
+        weight: 2
+      - material: GOLD_BLOCK
+        weight: 10
+      - material: IRON_BLOCK
+        weight: 12
+      - material: LAPIS_BLOCK
+        weight: 10
+      - material: REDSTONE_BLOCK
+        weight: 10
+      - material: BEACON
+        weight: 2
+      - material: BOOKSHELF
+        weight: 8
+      - material: GILDED_BLACKSTONE
+        weight: 8
+      - material: CRYING_OBSIDIAN
+        weight: 8
+      - material: SEA_LANTERN
+        weight: 10
+      - material: ANCIENT_DEBRIS
+        weight: 12
+      - material: DIAMOND_ORE
+        weight: 18
+      - material: EMERALD_ORE
+        weight: 14
+      - material: GOLD_ORE
+        weight: 16
+      - material: IRON_ORE
+        weight: 20
+      - material: COAL_ORE
+        weight: 16
+      - material: LAPIS_ORE
+        weight: 14
+      - material: REDSTONE_ORE
+        weight: 14
+      - material: NETHER_QUARTZ_ORE
+        weight: 12
+      - material: NETHER_GOLD_ORE
+        weight: 14
+    chests:
+      - weight: 20
+        items:
+          - material: BEACON
+            amount: 1
+          - material: NETHER_STAR
+            amount: 1
+          - material: NETHERITE_INGOT
+            amount: 3
+          - material: ENCHANTED_GOLDEN_APPLE
+            amount: 3
+      - weight: 18
+        items:
+          - material: TOTEM_OF_UNDYING
+            amount: 2
+          - material: GOLDEN_APPLE
+            amount: 8
+          - material: DIAMOND_BLOCK
+            amount: 3
+      - weight: 16
+        items:
+          - material: EMERALD_BLOCK
+            amount: 4
+          - material: DIAMOND_BLOCK
+            amount: 4
+          - material: GOLD_BLOCK
+            amount: 4
+          - material: NETHERITE_BLOCK
+            amount: 1
+      - weight: 14
+        items:
+          - material: NETHERITE_PICKAXE
+            amount: 1
+          - material: NETHERITE_AXE
+            amount: 1
+          - material: EXPERIENCE_BOTTLE
+            amount: 32
+      - weight: 12
+        items:
+          - material: WITHER_SKELETON_SKULL
+            amount: 3
+          - material: SOUL_SAND
+            amount: 4
+          - material: NETHERITE_SCRAP
+            amount: 4
+      - weight: 10
+        items:
+          - material: ELYTRA
+            amount: 1
+          - material: SHULKER_SHELL
+            amount: 6
+          - material: ENDER_CHEST
+            amount: 2
+          - material: TOTEM_OF_UNDYING
+            amount: 1
+      - weight: 10
+        items:
+          - material: ANCIENT_DEBRIS
+            amount: 6
+          - material: DIAMOND
+            amount: 16
+          - material: EMERALD
+            amount: 16
+          - material: GOLD_INGOT
+            amount: 32
+    mobs:
+      - type: IRON_GOLEM
+        weight: 30
+        name: "&fKoruyucu Golem"
+        baby: false
+      - type: EVOKER
+        weight: 20
+        name: "&8Buyucu Evoker"
+        baby: false
+      - type: VINDICATOR
+        weight: 20
+        name: "&8Baltali Vindicator"
+        baby: false
+      - type: RAVAGER
+        weight: 15
+        name: "&7Yikici Canavar"
+        baby: false
+      - type: WITHER_SKELETON
+        weight: 15
+        name: "&8Wither Iskeleti"
+        baby: false

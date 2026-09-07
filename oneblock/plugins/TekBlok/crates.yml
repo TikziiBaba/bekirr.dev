@@ -1,0 +1,299 @@
+# =======================================================
+#               TEKBLOK GELİŞMİŞ KASA SİSTEMİ
+#            Minecraft 1.16.1 - Efektli & Anahtarlı Kasalar
+# =======================================================
+
+crates:
+  cirak:
+    display-name: "&a&lÇIRAK KASASI"
+    key-name: "&a&lÇırak Kasa Anahtarı"
+    key-material: "TRIPWIRE_HOOK"
+    key-lore:
+      - "&7Bu anahtar ile Spawn'daki"
+      - "&aÇırak Kasası&7'nı açabilirsin!"
+      - ""
+      - "&eSağ Tık: &fKasayı Aç"
+      - "&bSol Tık: &fÖdülleri İncele"
+    particle: "VILLAGER_HAPPY"
+    particle-count: 12
+    hologram:
+      - "&a&l★ ÇIRAK KASASI ★"
+      - "&eAçmak için Sağ Tıkla &8| &7Sol Tık: İncele"
+      - "&7Gereken: &aÇırak Kasa Anahtarı"
+    rewards:
+      - material: "COAL"
+        amount: 32
+        name: "&832x Kömür"
+        chance: 30
+      - material: "IRON_INGOT"
+        amount: 16
+        name: "&f16x Demir Külçesi"
+        chance: 25
+      - material: "GOLDEN_APPLE"
+        amount: 2
+        name: "&62x Altın Elma"
+        chance: 15
+      - material: "OAK_LOG"
+        amount: 32
+        name: "&632x Meşe Kütüğü"
+        chance: 20
+      - type: "MONEY"
+        amount: 250
+        name: "&a250 ₺ Bakiye"
+        chance: 20
+      - material: "DIAMOND"
+        amount: 3
+        name: "&b3x Elmas"
+        chance: 10
+      - material: "COOKED_BEEF"
+        amount: 16
+        name: "&c16x Pişmiş Biftek"
+        chance: 20
+      - material: "IRON_PICKAXE"
+        amount: 1
+        name: "&fDemir Kazma (Verimlilik II)"
+        enchant: "DIG_SPEED:2"
+        chance: 15
+
+  maden:
+    display-name: "&b&lMADEN KASASI"
+    key-name: "&b&lMaden Kasa Anahtarı"
+    key-material: "TRIPWIRE_HOOK"
+    key-lore:
+      - "&7Bu anahtar ile Spawn'daki"
+      - "&bMaden Kasası&7'nı açabilirsin!"
+      - ""
+      - "&eSağ Tık: &fKasayı Aç"
+      - "&bSol Tık: &fÖdülleri İncele"
+    particle: "ENCHANTMENT_TABLE"
+    particle-count: 16
+    hologram:
+      - "&b&l★ MADEN KASASI ★"
+      - "&eAçmak için Sağ Tıkla &8| &7Sol Tık: İncele"
+      - "&7Gereken: &bMaden Kasa Anahtarı"
+    rewards:
+      - material: "IRON_BLOCK"
+        amount: 4
+        name: "&f4x Demir Bloğu"
+        chance: 25
+      - material: "GOLD_BLOCK"
+        amount: 2
+        name: "&e2x Altın Bloğu"
+        chance: 20
+      - material: "DIAMOND"
+        amount: 8
+        name: "&b8x Elmas"
+        chance: 20
+      - material: "EMERALD"
+        amount: 12
+        name: "&a12x Zümrüt"
+        chance: 15
+      - material: "NETHERITE_SCRAP"
+        amount: 1
+        name: "&41x Netherit Parçası"
+        chance: 8
+      - type: "MONEY"
+        amount: 1000
+        name: "&a1.000 ₺ Bakiye"
+        chance: 15
+      - material: "ANCIENT_DEBRIS"
+        amount: 2
+        name: "&42x Antik Kalıntı"
+        chance: 7
+      - material: "DIAMOND_PICKAXE"
+        amount: 1
+        name: "&bElmas Kazma (Servet II, Verimlilik III)"
+        enchant: "LOOT_BONUS_BLOCKS:2;DIG_SPEED:3"
+        chance: 10
+
+  savasci:
+    display-name: "&c&lSAVAŞÇI KASASI"
+    key-name: "&c&lSavaşçı Kasa Anahtarı"
+    key-material: "TRIPWIRE_HOOK"
+    key-lore:
+      - "&7Bu anahtar ile Spawn'daki"
+      - "&cSavaşçı Kasası&7'nı açabilirsin!"
+      - ""
+      - "&eSağ Tık: &fKasayı Aç"
+      - "&bSol Tık: &fÖdülleri İncele"
+    particle: "FLAME"
+    particle-count: 16
+    hologram:
+      - "&c&l★ SAVAŞÇI KASASI ★"
+      - "&eAçmak için Sağ Tıkla &8| &7Sol Tık: İncele"
+      - "&7Gereken: &cSavaşçı Kasa Anahtarı"
+    rewards:
+      - material: "DIAMOND_SWORD"
+        amount: 1
+        name: "&cKeskinlik V Elmas Kılıç"
+        enchant: "DAMAGE_ALL:5"
+        chance: 15
+      - material: "BOW"
+        amount: 1
+        name: "&6Güç V Yay"
+        enchant: "ARROW_DAMAGE:5"
+        chance: 15
+      - material: "TOTEM_OF_UNDYING"
+        amount: 1
+        name: "&eÖlümsüzlük Totemi"
+        chance: 15
+      - material: "GOLDEN_APPLE"
+        amount: 8
+        name: "&68x Altın Elma"
+        chance: 25
+      - material: "DIAMOND_CHESTPLATE"
+        amount: 1
+        name: "&bElmas Göğüslük (Koruma IV)"
+        enchant: "PROTECTION_ENVIRONMENTAL:4"
+        chance: 15
+      - type: "MONEY"
+        amount: 2500
+        name: "&a2.500 ₺ Bakiye"
+        chance: 15
+      - material: "SHIELD"
+        amount: 1
+        name: "&7Kırılmaz Savaş Kalkanı"
+        enchant: "DURABILITY:3;MENDING:1"
+        chance: 12
+      - material: "DIAMOND_HELMET"
+        amount: 1
+        name: "&bElmas Kask (Koruma IV)"
+        enchant: "PROTECTION_ENVIRONMENTAL:4"
+        chance: 15
+
+  efsanevi:
+    display-name: "&6&l★ EFSANEVİ KASA ★"
+    key-name: "&6&l★ Efsanevi Kasa Anahtarı ★"
+    key-material: "TRIPWIRE_HOOK"
+    key-lore:
+      - "&7Bu anahtar ile Spawn'daki"
+      - "&6Efsanevi Kasa&7'yı açabilirsin!"
+      - ""
+      - "&eSağ Tık: &fKasayı Aç"
+      - "&bSol Tık: &fÖdülleri İncele"
+    particle: "PORTAL"
+    particle-count: 20
+    hologram:
+      - "&6&l★ EFSANEVİ KASA ★"
+      - "&eAçmak için Sağ Tıkla &8| &7Sol Tık: İncele"
+      - "&7Gereken: &6Efsanevi Kasa Anahtarı"
+    rewards:
+      - material: "NETHERITE_INGOT"
+        amount: 2
+        name: "&4&l2x Netherit Külçesi"
+        chance: 12
+      - material: "ENCHANTED_GOLDEN_APPLE"
+        amount: 2
+        name: "&d&l2x Büyülü Altın Elma (Notch)"
+        chance: 12
+      - material: "BEACON"
+        amount: 1
+        name: "&b&lFener (Beacon)"
+        chance: 10
+      - material: "ELYTRA"
+        amount: 1
+        name: "&d&lElytra"
+        chance: 8
+      - material: "NETHERITE_SWORD"
+        amount: 1
+        name: "&4Netherit Kılıç (Keskinlik V, Kırılmazlık III)"
+        enchant: "DAMAGE_ALL:5;DURABILITY:3"
+        chance: 10
+      - type: "MONEY"
+        amount: 10000
+        name: "&6&l10.000 ₺ Bakiye"
+        chance: 15
+      - material: "DIAMOND_BLOCK"
+        amount: 8
+        name: "&b8x Elmas Bloğu"
+        chance: 20
+      - material: "NETHERITE_CHESTPLATE"
+        amount: 1
+        name: "&4Netherit Zırh (Koruma IV, Kırılmazlık III)"
+        enchant: "PROTECTION_ENVIRONMENTAL:4;DURABILITY:3"
+        chance: 10
+
+  spawner:
+    display-name: "&d&l★ SPAWNER KASASI ★"
+    key-name: "&d&lSpawner Kasa Anahtarı"
+    key-material: "TRIPWIRE_HOOK"
+    key-lore:
+      - "&7Bu anahtar ile Spawn'daki"
+      - "&dSpawner Kasası&7'nı açabilirsin!"
+      - ""
+      - "&eSağ Tık: &fKasayı Aç"
+      - "&bSol Tık: &fÖdülleri İncele"
+    particle: "DRAGON_BREATH"
+    particle-count: 24
+    hologram:
+      - "&d&l★ SPAWNER KASASI ★"
+      - "&eAçmak için Sağ Tıkla &8| &7Sol Tık: İncele"
+      - "&7Gereken: &dSpawner Kasa Anahtarı"
+    rewards:
+      - material: "SPAWNER"
+        amount: 1
+        name: "&f&l★ DEMİR GOLEM SPAWNER ★"
+        mob: "IRON_GOLEM"
+        chance: 1
+      - material: "SPAWNER"
+        amount: 1
+        name: "&6&lBlaze Spawner"
+        mob: "BLAZE"
+        chance: 8
+      - material: "SPAWNER"
+        amount: 1
+        name: "&8&lWither İskeleti Spawner"
+        mob: "WITHER_SKELETON"
+        chance: 6
+      - material: "SPAWNER"
+        amount: 1
+        name: "&5&lEnderman Spawner"
+        mob: "ENDERMAN"
+        chance: 10
+      - material: "SPAWNER"
+        amount: 1
+        name: "&a&lCreeper Spawner"
+        mob: "CREEPER"
+        chance: 12
+      - material: "SPAWNER"
+        amount: 1
+        name: "&7&lİskelet Spawner"
+        mob: "SKELETON"
+        chance: 15
+      - material: "SPAWNER"
+        amount: 1
+        name: "&2&lZombi Spawner"
+        mob: "ZOMBIE"
+        chance: 18
+      - material: "SPAWNER"
+        amount: 1
+        name: "&c&lÖrümcek Spawner"
+        mob: "SPIDER"
+        chance: 15
+      - material: "SPAWNER"
+        amount: 1
+        name: "&e&lİnek Spawner"
+        mob: "COW"
+        chance: 18
+      - material: "SPAWNER"
+        amount: 1
+        name: "&f&lKoyun Spawner"
+        mob: "SHEEP"
+        chance: 18
+      - material: "SPAWNER"
+        amount: 1
+        name: "&d&lDomuz Spawner"
+        mob: "PIG"
+        chance: 18
+      - material: "SPAWNER"
+        amount: 1
+        name: "&e&lTavuk Spawner"
+        mob: "CHICKEN"
+        chance: 18
+      - type: "MONEY"
+        amount: 15000
+        name: "&6&l15.000 ₺ Bakiye"
+        chance: 10
+
+# Kurulan kasa lokasyonları (/kasa olustur komutu ile eklenir)
+locations: {}

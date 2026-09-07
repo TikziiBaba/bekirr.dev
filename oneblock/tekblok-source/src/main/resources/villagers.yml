@@ -1,0 +1,92 @@
+# =======================================================
+#               TEKBLOK ÖZEL KÖYLÜ SİSTEMİ
+#         Maden Eritici & Takasçı Köylü Yapılandırması
+# =======================================================
+
+smelter:
+  title: "&8» &6&lMaden Eritici Köylü &8«"
+  villager-name: "&6&lMaden Eritici &8| &eDemirci"
+  conversions:
+    IRON_ORE:
+      input-name: "&fDemir Cevheri"
+      output: "IRON_INGOT"
+      output-name: "&fDemir Külçesi"
+      slot: 10
+    GOLD_ORE:
+      input-name: "&eAltın Cevheri"
+      output: "GOLD_INGOT"
+      output-name: "&eAltın Külçesi"
+      slot: 11
+    ANCIENT_DEBRIS:
+      input-name: "&4Antik Kalıntı"
+      output: "NETHERITE_SCRAP"
+      output-name: "&4Netherit Parçası"
+      slot: 12
+    COBBLESTONE:
+      input-name: "&7Kırıktaş"
+      output: "STONE"
+      output-name: "&7Düz Taş"
+      slot: 13
+    SAND:
+      input-name: "&eKum"
+      output: "GLASS"
+      output-name: "&fCam"
+      slot: 14
+    CLAY_BALL:
+      input-name: "&bKil Topu"
+      output: "BRICK"
+      output-name: "&cTuğla"
+      slot: 15
+    NETHERRACK:
+      input-name: "&cNether Taşı"
+      output: "NETHER_BRICK"
+      output-name: "&4Nether Tuğlası"
+      slot: 16
+
+trader:
+  title: "&8» &2&lTüccar Takas Menüsü &8«"
+  villager-name: "&a&lTakasçı Köylü &8| &2Tüccar"
+  trades:
+    trade1:
+      slot: 11
+      cost-item: "COAL"
+      cost-amount: 8
+      cost-name: "&88x Kömür"
+      give-item: "IRON_INGOT"
+      give-amount: 1
+      give-name: "&f1x Demir Külçesi"
+    trade2:
+      slot: 12
+      cost-item: "IRON_INGOT"
+      cost-amount: 4
+      cost-name: "&f4x Demir Külçesi"
+      give-item: "GOLD_INGOT"
+      give-amount: 1
+      give-name: "&e1x Altın Külçesi"
+    trade3:
+      slot: 13
+      cost-item: "GOLD_INGOT"
+      cost-amount: 2
+      cost-name: "&e2x Altın Külçesi"
+      give-item: "DIAMOND"
+      give-amount: 1
+      give-name: "&b1x Elmas"
+    trade4:
+      slot: 14
+      cost-item: "DIAMOND"
+      cost-amount: 1
+      cost-name: "&b1x Elmas"
+      give-item: "EMERALD"
+      give-amount: 1
+      give-name: "&a1x Zümrüt"
+    trade5:
+      slot: 15
+      cost-item: "EMERALD"
+      cost-amount: 2
+      cost-name: "&a2x Zümrüt"
+      give-item: "NETHERITE_SCRAP"
+      give-amount: 1
+      give-name: "&41x Netherit Parçası"
+
+# Kurulan köylü lokasyonları (/koylu olustur ile eklenir)
+villagers: {}
