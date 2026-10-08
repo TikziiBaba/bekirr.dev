@@ -1,882 +1,274 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BEKİR KAPLAN — Full-Stack Developer & Software Engineer</title>
-    <meta name="description"
-        content="Bekir Kaplan — Full-stack geliştirici ve yazılım mühendisi. Modern web teknolojileri, masaüstü uygulamaları ve ölçeklenebilir sistem mimarileri." />
+    <title>Bekir Kaplan — Full-Stack Developer & Software Engineer</title>
+    <meta name="description" content="Bekir Kaplan — Full-stack geliştirici ve yazılım mühendisi. Modern web teknolojileri, masaüstü uygulamaları ve ölçeklenebilir sistem mimarileri." />
     <meta name="author" content="Bekir Kaplan" />
-    <meta name="theme-color" content="#050507" />
-
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="theme-color" content="#0C0C0E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Supabase SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- GSAP (for subtle scroll animations) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="importmap">
+        { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
-
 <body>
-    <!-- Page Loader -->
-    <div class="page-loader" id="pageLoader">
-        <div class="spinner" style="width: 28px; height: 28px;"></div>
+    <!-- 3D sahne: tüm sayfa boyunca bölümden bölüme süzülen şekil -->
+    <canvas id="gl" class="gl" aria-hidden="true"></canvas>
+
+    <!-- Açılış -->
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader-panel loader-top"></div>
+        <div class="loader-panel loader-bottom"></div>
+        <span class="loader-label mono">bekirr.dev</span>
+        <span class="loader-count" id="loaderCount">000</span>
     </div>
 
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress"></div>
+    <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-    <!-- Toast Notification Container -->
-    <div class="toast-container" id="toastContainer"></div>
+    <!-- Üst menü (mix-blend ile her temada okunur) -->
+    <header class="nav">
+        <a href="#hero" class="nav-brand">Bekir Kaplan</a>
+        <nav class="nav-links">
+            <a href="#about" data-nav="about"><span class="mono">01</span>Hakkımda</a>
+            <a href="#skills" data-nav="skills"><span class="mono">02</span>Yetenekler</a>
+            <a href="#projects" data-nav="projects"><span class="mono">03</span>Projeler</a>
+            <a href="#contact" data-nav="contact"><span class="mono">04</span>İletişim</a>
+        </nav>
+        <button class="nav-menu mono" id="menuBtn" aria-expanded="false" aria-controls="menu">Menü</button>
+    </header>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         NAVBAR
-         ═══════════════════════════════════════════════════════════ -->
-    <nav class="navbar" id="navbar">
-        <div class="container navbar-inner">
-            <a href="#" class="navbar-brand" id="navbarBrand">
-                BEKİR <span class="accent">KAPLAN</span>
-            </a>
-
-            <div class="navbar-links" id="navbarLinks">
-                <a href="#hero" data-nav="hero">Ana Sayfa</a>
-                <a href="#about" data-nav="about">Hakkımda</a>
-                <a href="#skills" data-nav="skills">Yetenekler</a>
-                <a href="#projects" data-nav="projects">Projeler</a>
-                <a href="#contact" data-nav="contact">İletişim</a>
-                <a href="#chat" data-nav="chat" id="navChatBtn">💬 Canlı Sohbet</a>
-            </div>
-
-            <div class="navbar-auth" id="navbarAuth">
-                <!-- Unauthenticated: Login/Register buttons -->
-                <div id="authButtons">
-                    <button class="btn btn-ghost btn-sm" id="btnOpenLogin">Giriş Yap</button>
-                    <button class="btn btn-primary btn-sm" id="btnOpenRegister">Kayıt Ol</button>
-                </div>
-                <!-- Authenticated: User nav -->
-                <div id="userNav" class="user-nav" style="display: none;">
-                    <span class="user-nav-name" id="userNavName"></span>
-                    <div class="user-nav-avatar" id="userNavAvatar" title="Dashboard'a Git"></div>
-                    <button class="btn btn-ghost btn-sm" id="btnLogout">Çıkış</button>
-                </div>
-            </div>
-
-            <button class="navbar-toggle" id="navbarToggle" aria-label="Menüyü aç/kapat">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- ═══════════════════════════════════════════════════════════
-         AUTH MODAL
-         ═══════════════════════════════════════════════════════════ -->
-    <div class="auth-overlay" id="authOverlay">
-        <div class="auth-modal" id="authModal">
-            <button class="auth-modal-close" id="authClose" aria-label="Kapat">✕</button>
-
-            <!-- LOGIN FORM -->
-            <div id="loginView">
-                <div class="auth-modal-header">
-                    <h2>Giriş Yap</h2>
-                    <p>Hesabına giriş yap ve devam et.</p>
-                </div>
-                <div class="auth-message" id="loginMessage"></div>
-                <form class="auth-form" id="loginForm" novalidate>
-                    <div class="form-group">
-                        <label class="form-label" for="loginEmail">E-posta</label>
-                        <input type="email" class="form-input" id="loginEmail"
-                            placeholder="ornek@email.com" autocomplete="email" required />
-                        <span class="form-error" id="loginEmailError"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="loginPassword">Şifre</label>
-                        <div class="password-wrapper">
-                            <input type="password" class="form-input" id="loginPassword"
-                                placeholder="••••••••" autocomplete="current-password" required />
-                            <button type="button" class="password-toggle" data-target="loginPassword"
-                                aria-label="Şifreyi göster">👁</button>
-                        </div>
-                        <span class="form-error" id="loginPasswordError"></span>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg" id="loginSubmit">
-                        Giriş Yap
-                    </button>
-                </form>
-                <div class="auth-switch">
-                    Hesabın yok mu? <button id="switchToRegister">Kayıt Ol</button>
-                </div>
-            </div>
-
-            <!-- REGISTER FORM -->
-            <div id="registerView" style="display: none;">
-                <div class="auth-modal-header">
-                    <h2>Kayıt Ol</h2>
-                    <p>Yeni bir hesap oluştur.</p>
-                </div>
-                <div class="auth-message" id="registerMessage"></div>
-                <form class="auth-form" id="registerForm" novalidate>
-                    <div class="form-group">
-                        <label class="form-label" for="registerName">Ad Soyad</label>
-                        <input type="text" class="form-input" id="registerName"
-                            placeholder="Ad Soyad" autocomplete="name" required />
-                        <span class="form-error" id="registerNameError"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="registerEmail">E-posta</label>
-                        <input type="email" class="form-input" id="registerEmail"
-                            placeholder="ornek@email.com" autocomplete="email" required />
-                        <span class="form-error" id="registerEmailError"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="registerPassword">Şifre</label>
-                        <div class="password-wrapper">
-                            <input type="password" class="form-input" id="registerPassword"
-                                placeholder="En az 6 karakter" autocomplete="new-password" required />
-                            <button type="button" class="password-toggle" data-target="registerPassword"
-                                aria-label="Şifreyi göster">👁</button>
-                        </div>
-                        <span class="form-error" id="registerPasswordError"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="registerPasswordConfirm">Şifre Tekrar</label>
-                        <div class="password-wrapper">
-                            <input type="password" class="form-input" id="registerPasswordConfirm"
-                                placeholder="Şifreyi tekrar gir" autocomplete="new-password" required />
-                            <button type="button" class="password-toggle" data-target="registerPasswordConfirm"
-                                aria-label="Şifreyi göster">👁</button>
-                        </div>
-                        <span class="form-error" id="registerPasswordConfirmError"></span>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg" id="registerSubmit">
-                        Hesap Oluştur
-                    </button>
-                </form>
-                <div class="auth-switch">
-                    Zaten hesabın var mı? <button id="switchToLogin">Giriş Yap</button>
-                </div>
-            </div>
-        </div>
+    <div class="menu" id="menu">
+        <a href="#hero"><span class="mono">00</span>Ana Sayfa</a>
+        <a href="#about"><span class="mono">01</span>Hakkımda</a>
+        <a href="#skills"><span class="mono">02</span>Yetenekler</a>
+        <a href="#projects"><span class="mono">03</span>Projeler</a>
+        <a href="#contact"><span class="mono">04</span>İletişim</a>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         PORTFOLIO VIEW (Public)
-         ═══════════════════════════════════════════════════════════ -->
-    <div id="portfolioView" class="portfolio-view">
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="hero" data-theme="ink">
+            <div class="hero-top">
+                <span class="mono status"><i></i>Projelere &amp; İşbirliklerine Açık</span>
+                <span class="mono">Full-Stack Developer &amp; Engineer</span>
+            </div>
 
-        <!-- HERO SECTION -->
-        <section class="hero section" id="hero">
-            <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-content">
-                        <div class="hero-badge reveal">
-                            <span class="dot"></span>
-                            Projelere & İşbirliklerine Açık
-                        </div>
-                        <h1 class="hero-title reveal reveal-delay-1">
-                            Selam, ben Bekir —<br />
-                            <span class="accent">Kod & Tasarım</span>
-                        </h1>
-                        <p class="hero-description reveal reveal-delay-2">
-                            Full-stack yazılım geliştirici. Modern web teknolojileri, masaüstü uygulamaları
-                            ve performanslı dijital sistemler üretiyorum.
-                        </p>
-                        <div class="hero-actions reveal reveal-delay-3">
-                            <a href="#contact" class="btn btn-primary btn-lg">İletişime Geç</a>
-                            <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener"
-                                class="btn btn-secondary btn-lg">GitHub →</a>
-                        </div>
-                    </div>
+            <h1 class="hero-title">
+                <span class="ln"><span>Selam, ben Bekir —</span></span>
+                <span class="ln"><span>Kod &amp; <em>Tasarım</em></span></span>
+            </h1>
 
-                    <div class="hero-visual reveal reveal-delay-2">
-                        <div class="dev-card">
-                            <div class="dev-card-header">
-                                <div class="dev-card-avatar">
-                                    <img src="https://github.com/TikziiBaba.png" alt="Bekir Kaplan"
-                                        loading="lazy" />
-                                </div>
-                                <div class="dev-card-info">
-                                    <h3>Bekir Kaplan</h3>
-                                    <p>Full-Stack Developer & Engineer</p>
-                                </div>
-                            </div>
-                            <div class="dev-card-status">
-                                <span class="status-dot"></span>
-                                Yeni projelere açık
-                            </div>
-                            <div class="dev-card-tags">
-                                <span class="tag">NODE.JS</span>
-                                <span class="tag">ELECTRON</span>
-                                <span class="tag">JAVASCRIPT</span>
-                                <span class="tag">REACT</span>
-                                <span class="tag">SUPABASE</span>
-                                <span class="tag">GSAP</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="hero-bottom">
+                <p>Full-stack yazılım geliştirici. Modern web teknolojileri, masaüstü uygulamaları ve performanslı dijital sistemler üretiyorum.</p>
+                <div class="actions">
+                    <a href="#contact" class="pill pill-solid">İletişime Geç</a>
+                    <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener" class="pill">GitHub ↗</a>
                 </div>
+                <span class="mono scroll-cue">Kaydır ↓</span>
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
-        <section class="section" id="about">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-text">
-                        <span class="section-label reveal">Hakkımda</span>
-                        <h2 class="section-title reveal reveal-delay-1">Yazılımla Hikayemi<br />Kodluyorum</h2>
-                        <p class="reveal reveal-delay-2">
-                            Yazılım dünyasına tutkuyla bağlı bir full-stack geliştirici olarak, modern web teknolojileri
-                            ve masaüstü uygulamaları üzerine çalışıyorum. Node.js, Electron ve React gibi araçlarla
-                            yüksek performanslı, ölçeklenebilir ve estetik sistemler üretiyorum.
-                        </p>
-                        <p class="reveal reveal-delay-3">
+        <!-- HAKKIMDA -->
+        <section class="block" id="about" data-theme="dusk">
+            <div class="wrap">
+                <span class="eyebrow mono">(01) Hakkımda</span>
+                <h2 class="title">
+                    <span class="ln"><span>Yazılımla Hikayemi</span></span>
+                    <span class="ln"><span><em>Kodluyorum</em></span></span>
+                </h2>
+
+                <p class="statement" data-words>
+                    Yazılım dünyasına tutkuyla bağlı bir full-stack geliştirici olarak, modern web teknolojileri
+                    ve masaüstü uygulamaları üzerine çalışıyorum. Node.js, Electron ve React gibi araçlarla
+                    yüksek performanslı, ölçeklenebilir ve estetik sistemler üretiyorum.
+                </p>
+
+                <div class="about-cols">
+                    <div class="profile" data-fade>
+                        <img src="https://github.com/TikziiBaba.png" alt="Bekir Kaplan" loading="lazy" />
+                        <div>
+                            <h3>Bekir Kaplan</h3>
+                            <p class="mono">Full-Stack Developer &amp; Engineer</p>
+                            <p class="mono status"><i></i>Yeni projelere açık</p>
+                        </div>
+                    </div>
+                    <div data-fade>
+                        <p class="about-p">
                             Kullanıcı deneyimini ön planda tutan, temiz kod standartlarına uygun projeler geliştirmek
                             benim için sadece bir iş değil — bir tutku. Her projemde modern tasarım ilkelerini,
                             akıcı animasyonları ve sağlam mimariler kurmayı hedefliyorum.
                         </p>
-                    </div>
-
-                    <div class="about-stats">
-                        <div class="stat-card reveal">
-                            <div class="stat-value">3+</div>
-                            <div class="stat-label">Yıllık Deneyim</div>
-                        </div>
-                        <div class="stat-card reveal reveal-delay-1">
-                            <div class="stat-value">10+</div>
-                            <div class="stat-label">Tamamlanan Proje</div>
-                        </div>
-                        <div class="stat-card reveal reveal-delay-2">
-                            <div class="stat-value">6+</div>
-                            <div class="stat-label">Teknoloji Stack</div>
-                        </div>
-                        <div class="stat-card reveal reveal-delay-3">
-                            <div class="stat-value">∞</div>
-                            <div class="stat-label">Öğrenme İsteği</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SKILLS SECTION -->
-        <section class="section" id="skills">
-            <div class="container">
-                <span class="section-label reveal">Yetenekler</span>
-                <h2 class="section-title reveal reveal-delay-1">Teknoloji Stack'im</h2>
-                <p class="section-subtitle reveal reveal-delay-2">
-                    Modern web ve masaüstü geliştirme alanında kullandığım araçlar ve teknolojiler.
-                </p>
-
-                <div class="skills-grid">
-                    <!-- Frontend -->
-                    <div class="skill-card reveal">
-                        <div class="skill-card-icon">⚡</div>
-                        <h3>Frontend</h3>
-                        <div class="skill-card-items">
-                            <div class="skill-item">
-                                <span class="skill-item-name">JavaScript (ES6+)</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="92"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">React.js</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="85"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">HTML5 & CSS3</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="95"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">GSAP / ScrollTrigger</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="88"></div></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Backend -->
-                    <div class="skill-card reveal reveal-delay-1">
-                        <div class="skill-card-icon">🔧</div>
-                        <h3>Backend & Runtime</h3>
-                        <div class="skill-card-items">
-                            <div class="skill-item">
-                                <span class="skill-item-name">Node.js</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="90"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">Electron.js</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="87"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">Supabase</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="83"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">REST APIs</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="86"></div></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tools -->
-                    <div class="skill-card reveal reveal-delay-2">
-                        <div class="skill-card-icon">🛠</div>
-                        <h3>Araçlar & Diğer</h3>
-                        <div class="skill-card-items">
-                            <div class="skill-item">
-                                <span class="skill-item-name">Git & GitHub</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="90"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">Discord API</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="82"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">UI/UX Design</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="80"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-item-name">Responsive Design</span>
-                                <div class="skill-item-bar"><div class="skill-item-fill" data-width="93"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PROJECTS SECTION -->
-        <section class="section" id="projects">
-            <div class="container">
-                <span class="section-label reveal">Projeler</span>
-                <h2 class="section-title reveal reveal-delay-1">Öne Çıkan Çalışmalar</h2>
-                <p class="section-subtitle reveal reveal-delay-2">
-                    Geliştirdiğim ve tutkuyla üzerinde çalıştığım projelerden bazıları.
-                </p>
-
-                <div class="projects-grid">
-                    <!-- Project 1: Bekofy (Featured) -->
-                    <div class="project-card project-card-featured reveal">
-                        <span class="project-card-number">01 // MÜZİK PLATFORMU</span>
-                        <h3>Bekofy Müzik Platformu 🎧</h3>
-                        <p>
-                            Electron üzerine inşa edilmiş modern masaüstü müzik uygulaması. Canlı senkronize şarkı
-                            sözleri, Jam Sessions, özel çalma listeleri ve Discord RPC entegrasyonu ile zengin
-                            bir müzik deneyimi sunuyor.
-                        </p>
-                        <div class="project-card-tags">
-                            <span class="tag">ELECTRON</span>
-                            <span class="tag">NODE.JS</span>
-                            <span class="tag">DISCORD RPC</span>
-                            <span class="tag">REST API</span>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: LuckMC -->
-                    <a href="https://luckmc.bekirr.dev" target="_blank" rel="noopener"
-                        class="project-card reveal reveal-delay-1">
-                        <span class="project-card-number">02 // MINECRAFT EKOSİSTEMİ</span>
-                        <h3>LuckMC Sunucu Ekosistemi ⚔️</h3>
-                        <p>
-                            Modern web teknolojileri ile geliştirilmiş sunucu sitesi ve gelişmiş moderasyon
-                            komutlu Discord botu. Tam entegre bir Minecraft sunucu yönetim sistemi.
-                        </p>
-                        <div class="project-card-tags">
-                            <span class="tag">WEB</span>
-                            <span class="tag">DISCORD BOT</span>
-                            <span class="tag">NODE.JS</span>
-                        </div>
-                        <span class="project-card-link">Siteyi Ziyaret Et →</span>
-                    </a>
-
-                    <!-- Project 3: Full-Stack Architecture -->
-                    <div class="project-card reveal reveal-delay-2">
-                        <span class="project-card-number">03 // WEB TECH</span>
-                        <h3>Full-Stack Mimarisi ⚡</h3>
-                        <p>
-                            Node.js, React, Supabase, GSAP ScrollTrigger ve modern JavaScript standartları ile
-                            yüksek performanslı sistemler. Ölçeklenebilir ve bakımı kolay projeler.
-                        </p>
-                        <div class="project-card-tags">
-                            <span class="tag">REACT</span>
-                            <span class="tag">SUPABASE</span>
-                            <span class="tag">GSAP</span>
-                        </div>
-                    </div>
-
-                    <!-- Project 4: UI/UX -->
-                    <div class="project-card reveal reveal-delay-3">
-                        <span class="project-card-number">04 // TASARIM</span>
-                        <h3>UI/UX & Animasyon Vizyonu 🎨</h3>
-                        <p>
-                            Obsidian temalı modern tasarımlar, mikro-etkileşimler ve responsive web
-                            deneyimleri ile kullanıcıları etkileyen estetik arayüzler.
-                        </p>
-                        <div class="project-card-tags">
-                            <span class="tag">CSS3</span>
-                            <span class="tag">GSAP</span>
-                            <span class="tag">RESPONSIVE</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT SECTION -->
-        <section class="section" id="contact">
-            <div class="container">
-                <span class="section-label reveal">İletişim</span>
-                <h2 class="section-title reveal reveal-delay-1">Bir Fikrin mi Var?</h2>
-                <p class="section-subtitle reveal reveal-delay-2">
-                    Yeni projeler, işbirlikleri veya sadece tanışmak için bana ulaşabilirsin.
-                </p>
-
-                <div class="contact-grid">
-                    <div class="contact-info reveal reveal-delay-3">
-                        <a href="mailto:dedyusuf99@gmail.com" class="contact-link-item">
-                            <div class="contact-link-icon">📧</div>
-                            <div class="contact-link-text">
-                                <h4>E-posta</h4>
-                                <p>dedyusuf99@gmail.com</p>
-                            </div>
-                        </a>
-                        <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener"
-                            class="contact-link-item">
-                            <div class="contact-link-icon">💻</div>
-                            <div class="contact-link-text">
-                                <h4>GitHub</h4>
-                                <p>@TikziiBaba</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <form class="contact-form reveal reveal-delay-4" id="contactForm" novalidate>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="contactName">Adın</label>
-                                <input type="text" class="form-input" id="contactName"
-                                    placeholder="Adın" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="contactEmail">E-posta</label>
-                                <input type="email" class="form-input" id="contactEmail"
-                                    placeholder="ornek@email.com" required />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="contactMessage">Mesaj</label>
-                            <textarea class="form-input" id="contactMessage"
-                                placeholder="Mesajını yaz..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="contactSubmit">
-                            Mesaj Gönder
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════════
-         FULL-PAGE LIVE CHAT VIEW
-         ═══════════════════════════════════════════════════════════ -->
-    <div id="chatView" class="chat-page-view">
-        <div class="container chat-page-container">
-            <div class="chat-page-header">
-                <div class="chat-page-title-box">
-                    <button class="btn btn-secondary btn-sm" id="btnChatBackToSite">← Siteye Dön</button>
-                    <div>
-                        <h2>💬 Canlı <span class="accent">Sohbet</span></h2>
-                        <span class="chat-online-count" id="chatPageOnlineCount">
-                            <span class="chat-online-dot"></span>
-                            <span id="chatPageOnlineText">Bağlanıyor...</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="chat-page-actions">
-                    <div class="chat-search-wrapper">
-                        <input type="text" class="chat-search-input" id="chatSearchInput" placeholder="Mesajlarda ara..." autocomplete="off" />
-                    </div>
-                    <button class="btn btn-ghost btn-sm" id="btnToggleSound" title="Ses Efektini Aç/Kapat">
-                        <span id="soundIcon">🔊</span>
-                    </button>
-                    <button class="btn btn-danger btn-sm" id="chatPageClearBtn" style="display: none;">Tüm Sohbeti Temizle</button>
-                </div>
-            </div>
-
-            <div class="chat-page-layout">
-                <!-- Chat Stream -->
-                <div class="chat-page-main">
-                    <div class="chat-messages chat-page-messages" id="chatPageMessages">
-                        <div class="chat-welcome" id="chatPageWelcome">
-                            <span class="chat-welcome-icon">🚀</span>
-                            <p>Canlı sohbete hoş geldin! Mesaj yazmaya başla.</p>
-                        </div>
-                    </div>
-
-                    <!-- Input Bar -->
-                    <div class="chat-input-area chat-page-input-area" id="chatPageInputArea" style="display: none;">
-                        <div class="chat-emoji-toolbar">
-                            <button type="button" class="chat-emoji-pill" data-emoji="👍">👍</button>
-                            <button type="button" class="chat-emoji-pill" data-emoji="❤️">❤️</button>
-                            <button type="button" class="chat-emoji-pill" data-emoji="🔥">🔥</button>
-                            <button type="button" class="chat-emoji-pill" data-emoji="🚀">🚀</button>
-                            <button type="button" class="chat-emoji-pill" data-emoji="💡">💡</button>
-                            <button type="button" class="chat-emoji-pill" data-emoji="💻">💻</button>
-                            <button type="button" class="chat-emoji-pill" data-emoji="💯">💯</button>
-                        </div>
-                        <div class="chat-input-wrapper">
-                            <input type="text" class="chat-input" id="chatPageInput" placeholder="Mesajını yaz..." maxlength="500" autocomplete="off" />
-                            <button class="chat-send-btn" id="chatPageSendBtn" aria-label="Gönder" disabled>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="chat-char-count" id="chatPageCharCount">0 / 500</div>
-                    </div>
-
-                    <!-- Unauthenticated Login Prompt -->
-                    <div class="chat-login-prompt" id="chatPageLoginPrompt">
-                        <p>Sohbete katılmak ve mesaj göndermek için giriş yapın.</p>
-                        <div style="display: flex; gap: 10px; margin-top: 8px;">
-                            <button class="btn btn-primary btn-sm" id="chatPageLoginBtn">Giriş Yap</button>
-                            <button class="btn btn-secondary btn-sm" id="chatPageRegisterBtn">Kayıt Ol</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chat Sidebar (Active Users & Info) -->
-                <div class="chat-sidebar">
-                    <div class="chat-sidebar-card">
-                        <h4>👥 Aktif Katılımcılar</h4>
-                        <div class="chat-users-list" id="chatUsersList">
-                            <div class="chat-user-item">
-                                <div class="chat-user-avatar">👨‍💻</div>
-                                <div class="chat-user-info">
-                                    <span class="chat-user-name">Bekir Kaplan</span>
-                                    <span class="chat-user-status">Geliştirici</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chat-sidebar-card">
-                        <h4>📜 Sohbet Odası Kuralları</h4>
-                        <ul class="chat-rules-list">
-                            <li>✨ Seviyeli ve yapıcı bir dil kullanın.</li>
-                            <li>🚀 Proje, yazılım ve tasarım fikirlerini paylaşabilirsiniz.</li>
-                            <li>🚫 Spam, reklam ve zararlı link paylaşımı yasaktır.</li>
+                        <ul class="chips">
+                            <li>Node.js</li><li>Electron</li><li>JavaScript</li><li>React</li><li>Supabase</li><li>GSAP</li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         DASHBOARD VIEW (Protected)
-         ═══════════════════════════════════════════════════════════ -->
-    <div id="dashboardView" class="dashboard-view">
-        <div class="container">
-            <div class="dashboard-header">
-                <div class="dashboard-welcome">
-                    <h1>Hoş geldin, <span class="accent" id="dashboardUserName">Kullanıcı</span></h1>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <button class="btn btn-secondary btn-sm" id="btnBackToSite">← Siteye Dön</button>
-                        <button class="btn btn-danger btn-sm" id="btnDashboardLogout">Çıkış Yap</button>
-                    </div>
+                <div class="stats">
+                    <div class="stat" data-fade><span class="stat-num"><b data-count="3">0</b>+</span><span class="mono">Yıllık Deneyim</span></div>
+                    <div class="stat" data-fade><span class="stat-num"><b data-count="10">0</b>+</span><span class="mono">Tamamlanan Proje</span></div>
+                    <div class="stat" data-fade><span class="stat-num"><b data-count="6">0</b>+</span><span class="mono">Teknoloji Stack</span></div>
+                    <div class="stat" data-fade><span class="stat-num">∞</span><span class="mono">Öğrenme İsteği</span></div>
                 </div>
             </div>
+        </section>
 
-            <div class="dashboard-grid">
-                <!-- Profile Card -->
-                <div class="dashboard-card">
-                    <h3>👤 Profil Bilgileri & Düzenleme</h3>
-                    <div class="profile-row">
-                        <span class="profile-row-label">Ad Soyad</span>
-                        <span class="profile-row-value" id="profileName">—</span>
-                    </div>
-                    <div class="profile-row">
-                        <span class="profile-row-label">E-posta</span>
-                        <span class="profile-row-value" id="profileEmail">—</span>
-                    </div>
-                    <div class="profile-row">
-                        <span class="profile-row-label">Kayıt Tarihi</span>
-                        <span class="profile-row-value" id="profileCreatedAt">—</span>
-                    </div>
-                    <div class="profile-row">
-                        <span class="profile-row-label">Unvan / Biyo</span>
-                        <span class="profile-row-value" id="profileBio">—</span>
-                    </div>
+        <!-- YETENEKLER -->
+        <section class="block" id="skills" data-theme="warm">
+            <div class="wrap">
+                <span class="eyebrow mono">(02) Yetenekler</span>
+                <h2 class="title">
+                    <span class="ln"><span>Teknoloji <em>Stack'im</em></span></span>
+                </h2>
+                <p class="lead" data-fade>Modern web ve masaüstü geliştirme alanında kullandığım araçlar ve teknolojiler.</p>
 
-                    <!-- Profile Edit Form -->
-                    <div class="profile-edit-box" style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
-                        <h4 style="font-size: 14px; margin-bottom: 12px; color: var(--emerald);">✏️ Profili Güncelle</h4>
-                        <form id="profileEditForm" novalidate>
-                            <div class="form-group" style="margin-bottom: 12px;">
-                                <label class="form-label" for="profileEditName">Ad Soyad</label>
-                                <input type="text" class="form-input" id="profileEditName" placeholder="Ad Soyad" required />
-                            </div>
-                            <div class="form-group" style="margin-bottom: 12px;">
-                                <label class="form-label" for="profileEditBio">Unvan / Biyografi</label>
-                                <input type="text" class="form-input" id="profileEditBioInput" placeholder="Örn: Full-Stack Developer" maxlength="60" />
-                            </div>
-                            <div class="form-group" style="margin-bottom: 14px;">
-                                <label class="form-label">Profil Simgesi / Avatar Seç</label>
-                                <div class="avatar-picker" id="avatarPicker">
-                                    <button type="button" class="avatar-opt active" data-avatar="👨‍💻">👨‍💻</button>
-                                    <button type="button" class="avatar-opt" data-avatar="⚡">⚡</button>
-                                    <button type="button" class="avatar-opt" data-avatar="🚀">🚀</button>
-                                    <button type="button" class="avatar-opt" data-avatar="💻">💻</button>
-                                    <button type="button" class="avatar-opt" data-avatar="🎨">🎨</button>
-                                    <button type="button" class="avatar-opt" data-avatar="🛡️">🛡️</button>
-                                    <button type="button" class="avatar-opt" data-avatar="🤖">🤖</button>
-                                    <button type="button" class="avatar-opt" data-avatar="🔮">🔮</button>
-                                    <button type="button" class="avatar-opt" data-avatar="☕">☕</button>
-                                    <button type="button" class="avatar-opt" data-avatar="🔥">🔥</button>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm" id="btnSaveProfile" style="width: 100%;">
-                                Profili Kaydet
-                            </button>
-                        </form>
+                <div class="skill-cols">
+                    <div class="skill-group" data-fade>
+                        <h3><span class="mono">A</span>Frontend</h3>
+                        <div class="skill-row"><span>JavaScript (ES6+)</span><b data-count="92">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>React.js</span><b data-count="85">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>HTML5 &amp; CSS3</span><b data-count="95">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>GSAP / ScrollTrigger</span><b data-count="88">0</b><i class="rule"></i></div>
                     </div>
-                </div>
-
-                <!-- Session Card -->
-                <div class="dashboard-card">
-                    <h3>🔐 Oturum Durumu</h3>
-                    <div class="profile-row">
-                        <span class="profile-row-label">Durum</span>
-                        <span class="session-badge"><span class="dot"></span> Aktif Oturum</span>
+                    <div class="skill-group" data-fade>
+                        <h3><span class="mono">B</span>Backend &amp; Runtime</h3>
+                        <div class="skill-row"><span>Node.js</span><b data-count="90">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>Electron.js</span><b data-count="87">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>Supabase</span><b data-count="83">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>REST APIs</span><b data-count="86">0</b><i class="rule"></i></div>
                     </div>
-                    <div class="profile-row">
-                        <span class="profile-row-label">Son Giriş</span>
-                        <span class="profile-row-value" id="profileLastSignIn">—</span>
+                    <div class="skill-group" data-fade>
+                        <h3><span class="mono">C</span>Araçlar &amp; Diğer</h3>
+                        <div class="skill-row"><span>Git &amp; GitHub</span><b data-count="90">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>Discord API</span><b data-count="82">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>UI/UX Design</span><b data-count="80">0</b><i class="rule"></i></div>
+                        <div class="skill-row"><span>Responsive Design</span><b data-count="93">0</b><i class="rule"></i></div>
                     </div>
-                    <div class="profile-row">
-                        <span class="profile-row-label">Oturum Süresi</span>
-                        <span class="profile-row-value" id="profileSessionExpiry">—</span>
-                    </div>
-                </div>
-
-                <!-- Account Actions -->
-                <div class="dashboard-card dashboard-card-full">
-                    <h3>⚙️ Şifre Değiştir & Güvenlik</h3>
-                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.5;">
-                        Hesabınızın güvenliği için şifrenizi dilediğiniz zaman güncelleyebilirsiniz.
-                    </p>
-                    <form id="passwordUpdateForm" class="password-update-form" style="max-width: 420px;" novalidate>
-                        <div class="form-group" style="margin-bottom: 12px;">
-                            <label class="form-label" for="profileNewPassword">Yeni Şifre</label>
-                            <input type="password" class="form-input" id="profileNewPassword" placeholder="En az 6 karakter" required minlength="6" />
-                        </div>
-                        <div class="form-group" style="margin-bottom: 14px;">
-                            <label class="form-label" for="profileConfirmPassword">Yeni Şifre (Tekrar)</label>
-                            <input type="password" class="form-input" id="profileConfirmPassword" placeholder="Şifrenizi tekrar girin" required minlength="6" />
-                        </div>
-                        <button type="submit" class="btn btn-secondary btn-sm" id="btnUpdatePassword">
-                            Şifreyi Güncelle
-                        </button>
-                    </form>
                 </div>
             </div>
 
-            <!-- ═══════════════════════════════════════════════════════
-                 ADMIN PANEL (Only visible for admin users)
-                 ═══════════════════════════════════════════════════════ -->
-            <div id="adminPanel" class="admin-panel" style="display: none;">
-                <div class="admin-panel-header">
-                    <h2>🛡️ Admin <span class="accent">Panel</span></h2>
-                    <p>Kullanıcıları yönet ve siteyi kontrol et.</p>
-                </div>
-
-                <!-- Admin Stats -->
-                <div class="admin-stats">
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-value" id="adminTotalUsers">—</div>
-                        <div class="admin-stat-label">Toplam Kullanıcı</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-value" id="adminTotalMessages">—</div>
-                        <div class="admin-stat-label">Toplam Mesaj</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-value" id="adminTodayMessages">—</div>
-                        <div class="admin-stat-label">Bugünkü Mesaj</div>
-                    </div>
-                </div>
-
-                <!-- User Management -->
-                <div class="admin-section">
-                    <div class="admin-section-header">
-                        <h3>👥 Kullanıcı Yönetimi</h3>
-                        <div class="admin-search-wrapper">
-                            <input type="text" class="admin-search" id="adminUserSearch"
-                                placeholder="Kullanıcı ara..." autocomplete="off" />
-                        </div>
-                    </div>
-
-                    <div class="admin-table-wrapper">
-                        <table class="admin-table" id="adminUserTable">
-                            <thead>
-                                <tr>
-                                    <th>Kullanıcı</th>
-                                    <th>E-posta</th>
-                                    <th>Kayıt Tarihi</th>
-                                    <th>Rol</th>
-                                    <th>İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminUserTableBody">
-                                <tr>
-                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px;">
-                                        Yükleniyor...
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Chat Management -->
-                <div class="admin-section">
-                    <div class="admin-section-header">
-                        <h3>💬 Sohbet Yönetimi</h3>
-                        <button class="btn btn-danger btn-sm" id="adminClearChat">Tüm Sohbeti Temizle</button>
-                    </div>
-                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
-                        Sohbette <code style="background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px;">.clear</code> 
-                        komutunu yazarak da tüm mesajları temizleyebilirsin.
-                    </p>
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee-track" id="marqueeTrack">
+                    <span>JavaScript</span><i>✳</i><span><em>React</em></span><i>✳</i><span>Node.js</span><i>✳</i><span><em>Electron</em></span><i>✳</i><span>Supabase</span><i>✳</i><span><em>GSAP</em></span><i>✳</i><span>Discord API</span><i>✳</i><span><em>REST</em></span><i>✳</i>
                 </div>
             </div>
+        </section>
 
-            <!-- Admin Edit User Modal -->
-            <div class="admin-modal-overlay" id="adminEditOverlay">
-                <div class="admin-modal" id="adminEditModal">
-                    <div class="admin-modal-header">
-                        <h3>Kullanıcı Düzenle</h3>
-                        <button class="chat-panel-close" id="adminEditClose">✕</button>
+        <!-- PROJELER (masaüstünde sabitlenip yatay kayar) -->
+        <section class="projects" id="projects" data-theme="cool">
+            <div class="projects-track" id="projectsTrack">
+                <div class="projects-head">
+                    <span class="eyebrow mono">(03) Projeler</span>
+                    <h2 class="title">
+                        <span class="ln"><span>Öne Çıkan</span></span>
+                        <span class="ln"><span><em>Çalışmalar</em></span></span>
+                    </h2>
+                    <p class="lead">Geliştirdiğim ve tutkuyla üzerinde çalıştığım projelerden bazıları.</p>
+                    <span class="mono hint">Kaydırmaya devam et →</span>
+                </div>
+
+                <article class="project">
+                    <div class="project-cover cover-1"><span class="project-index">01</span><span class="project-glyph">🎧</span></div>
+                    <div class="project-body">
+                        <span class="mono">01 // Müzik Platformu</span>
+                        <h3>Bekofy Müzik Platformu</h3>
+                        <p>Electron üzerine inşa edilmiş modern masaüstü müzik uygulaması. Canlı senkronize şarkı sözleri, Jam Sessions, özel çalma listeleri ve Discord RPC entegrasyonu ile zengin bir müzik deneyimi sunuyor.</p>
+                        <ul class="chips"><li>Electron</li><li>Node.js</li><li>Discord RPC</li><li>REST API</li></ul>
                     </div>
-                    <form id="adminEditForm" class="admin-edit-form">
-                        <input type="hidden" id="adminEditUserId" />
-                        <div class="form-group">
-                            <label class="form-label" for="adminEditName">Ad Soyad</label>
-                            <input type="text" class="form-input" id="adminEditName" placeholder="Ad Soyad" />
+                </article>
+
+                <a class="project" href="https://luckmc.bekirr.dev" target="_blank" rel="noopener">
+                    <div class="project-cover cover-2"><span class="project-index">02</span><span class="project-glyph">⚔️</span></div>
+                    <div class="project-body">
+                        <span class="mono">02 // Minecraft Ekosistemi</span>
+                        <h3>LuckMC Sunucu Ekosistemi</h3>
+                        <p>Modern web teknolojileri ile geliştirilmiş sunucu sitesi ve gelişmiş moderasyon komutlu Discord botu.</p>
+                        <ul class="chips"><li>Web</li><li>Discord Bot</li><li>Node.js</li></ul>
+                        <span class="project-link">Siteyi Ziyaret Et ↗</span>
+                    </div>
+                </a>
+
+                <article class="project">
+                    <div class="project-cover cover-3"><span class="project-index">03</span><span class="project-glyph">⚡</span></div>
+                    <div class="project-body">
+                        <span class="mono">03 // Web Tech</span>
+                        <h3>Full-Stack Mimarisi</h3>
+                        <p>Node.js, React, Supabase, GSAP ScrollTrigger ve modern JavaScript standartları ile yüksek performanslı sistemler.</p>
+                        <ul class="chips"><li>React</li><li>Supabase</li><li>GSAP</li></ul>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <div class="project-cover cover-4"><span class="project-index">04</span><span class="project-glyph">🎨</span></div>
+                    <div class="project-body">
+                        <span class="mono">04 // Tasarım</span>
+                        <h3>UI/UX &amp; Animasyon Vizyonu</h3>
+                        <p>Obsidian temalı modern tasarımlar, mikro-etkileşimler ve responsive web deneyimleri.</p>
+                        <ul class="chips"><li>CSS3</li><li>GSAP</li><li>Responsive</li></ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- İLETİŞİM -->
+        <section class="block contact" id="contact" data-theme="ember">
+            <div class="wrap">
+                <span class="eyebrow mono">(04) İletişim</span>
+                <h2 class="title title-xl">
+                    <span class="ln"><span>Bir Fikrin</span></span>
+                    <span class="ln"><span>mi <em>Var?</em></span></span>
+                </h2>
+                <p class="lead" data-fade>Yeni projeler, işbirlikleri veya sadece tanışmak için bana ulaşabilirsin.</p>
+
+                <a href="mailto:dedyusuf99@gmail.com" class="mail-link" data-fade>dedyusuf99@gmail.com <span>↗</span></a>
+
+                <div class="contact-grid">
+                    <form class="contact-form" id="contactForm" novalidate data-fade>
+                        <div class="field">
+                            <label for="contactName" class="mono">Adın</label>
+                            <input type="text" id="contactName" placeholder="Adın" autocomplete="name" required />
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">E-posta</label>
-                            <input type="email" class="form-input" id="adminEditEmail" disabled
-                                style="opacity: 0.5; cursor: not-allowed;" />
-                            <small style="font-size: 11px; color: var(--text-muted);">E-posta Supabase Dashboard'dan değiştirilebilir.</small>
+                        <div class="field">
+                            <label for="contactEmail" class="mono">E-posta</label>
+                            <input type="email" id="contactEmail" placeholder="ornek@email.com" autocomplete="email" required />
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Rol</label>
-                            <select class="form-input" id="adminEditRole">
-                                <option value="user">Kullanıcı</option>
-                                <option value="admin">Admin</option>
-                            </select>
+                        <div class="field field-wide">
+                            <label for="contactMessage" class="mono">Mesaj</label>
+                            <textarea id="contactMessage" rows="4" placeholder="Mesajını yaz..." required></textarea>
                         </div>
-                        <div style="display: flex; gap: 10px; margin-top: 8px;">
-                            <button type="submit" class="btn btn-primary btn-sm">Kaydet</button>
-                            <button type="button" class="btn btn-secondary btn-sm" id="adminEditCancel">İptal</button>
+                        <div class="form-foot field-wide">
+                            <p class="form-note mono" id="contactNote"></p>
+                            <button type="submit" class="pill pill-solid">Mesaj Gönder</button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         LIVE CHAT WIDGET
-         ═══════════════════════════════════════════════════════════ -->
-    <div id="liveChatWidget" class="live-chat-widget">
-        <!-- Chat FAB (Floating Action Button) -->
-        <button class="chat-fab" id="chatFab" aria-label="Canlı Sohbet">
-            <span class="chat-fab-icon" id="chatFabIcon">💬</span>
-            <span class="chat-fab-pulse"></span>
-            <span class="chat-fab-badge" id="chatUnreadBadge" style="display: none;">0</span>
-        </button>
-
-        <!-- Chat Panel -->
-        <div class="chat-panel" id="chatPanel">
-            <!-- Chat Header -->
-            <div class="chat-panel-header">
-                <div class="chat-panel-title">
-                    <span class="chat-panel-icon">💬</span>
-                    <div>
-                        <h4>Canlı Sohbet</h4>
-                        <span class="chat-online-count" id="chatOnlineCount">
-                            <span class="chat-online-dot"></span>
-                            <span id="chatOnlineText">Bağlanıyor...</span>
-                        </span>
+                    <div class="contact-side" data-fade>
+                        <a href="mailto:dedyusuf99@gmail.com"><span class="mono">E-posta</span>dedyusuf99@gmail.com</a>
+                        <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener"><span class="mono">GitHub</span>@TikziiBaba</a>
                     </div>
                 </div>
-                <div style="display: flex; gap: 6px; align-items: center;">
-                    <button class="btn-chat-expand" id="btnExpandChat" title="Tam Sayfa Sohbeti Aç">⛶ Tam Sayfa</button>
-                    <button class="chat-panel-close" id="chatPanelClose" aria-label="Sohbeti kapat">✕</button>
-                </div>
             </div>
 
-            <!-- Chat Messages -->
-            <div class="chat-messages" id="chatMessages">
-                <div class="chat-welcome" id="chatWelcome">
-                    <span class="chat-welcome-icon">🚀</span>
-                    <p>Hoş geldin! Mesaj yazmaya başla.</p>
-                </div>
-            </div>
+            <footer class="footer wrap">
+                <span class="footer-brand">BEKİR KAPLAN</span>
+                <nav>
+                    <a href="#hero">Ana Sayfa</a>
+                    <a href="#about">Hakkımda</a>
+                    <a href="#projects">Projeler</a>
+                    <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener">GitHub</a>
+                </nav>
+                <span class="mono">© 2026 Bekir Kaplan. Tüm hakları saklıdır.</span>
+            </footer>
+        </section>
+    </main>
 
-            <!-- Chat Input (Authenticated) -->
-            <div class="chat-input-area" id="chatInputArea" style="display: none;">
-                <div class="chat-input-wrapper">
-                    <input type="text" class="chat-input" id="chatInput"
-                        placeholder="Mesajını yaz..." maxlength="500" autocomplete="off" />
-                    <button class="chat-send-btn" id="chatSendBtn" aria-label="Gönder" disabled>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="22" y1="2" x2="11" y2="13"></line>
-                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                        </svg>
-                    </button>
-                </div>
-                <div class="chat-char-count" id="chatCharCount">0 / 500</div>
-            </div>
-
-            <!-- Login Prompt (Unauthenticated) -->
-            <div class="chat-login-prompt" id="chatLoginPrompt">
-                <p>Sohbete katılmak için giriş yap.</p>
-                <button class="btn btn-primary btn-sm" id="chatLoginBtn">Giriş Yap</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════════
-         FOOTER
-         ═══════════════════════════════════════════════════════════ -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <div class="footer-brand">
-                BEKİR <span class="accent">KAPLAN</span>
-            </div>
-            <div class="footer-links">
-                <a href="#hero">Ana Sayfa</a>
-                <a href="#about">Hakkımda</a>
-                <a href="#projects">Projeler</a>
-                <a href="https://github.com/TikziiBaba" target="_blank" rel="noopener">GitHub</a>
-            </div>
-            <span class="footer-copy">© 2026 Bekir Kaplan. Tüm hakları saklıdır.</span>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="supabase-config.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
-
 </html>
