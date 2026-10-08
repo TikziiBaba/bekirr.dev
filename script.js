@@ -12,11 +12,11 @@ gsap.registerPlugin(ScrollTrigger);
 // Bölüm arka planları: hepsi aynı koyu ailede, sadece alt tonları farklı (nazik geçiş için).
 // Yazı rengi sabit kalır, böylece metin hiçbir zaman tersine dönmez.
 const THEMES = {
-    ink: '#0C0C0E',
-    dusk: '#131219',
-    warm: '#17130F',
-    cool: '#0D1016',
-    ember: '#1C120D',
+    ink: '#061026',
+    dusk: '#081530',
+    warm: '#0A1A33',
+    cool: '#05122A',
+    ember: '#091A38',
 };
 
 // 3D şeklin her bölümdeki konumu: [x, y, ölçek] — x/y ekranın yarı genişliği/yüksekliği oranında
@@ -451,9 +451,9 @@ async function initScene() {
     const uniforms = {
         uTime: { value: 0 },
         uDistort: { value: 0.24 },
-        uColorA: { value: new THREE.Color('#3A35E8') },
-        uColorB: { value: new THREE.Color('#FF6A2B') },
-        uColorC: { value: new THREE.Color('#FFD9C7') },
+        uColorA: { value: new THREE.Color('#0B5FCB') },
+        uColorB: { value: new THREE.Color('#62DCF5') },
+        uColorC: { value: new THREE.Color('#D4FBFF') },
     };
     const shape = new THREE.Mesh(
         new THREE.IcosahedronGeometry(1.15, 64),
@@ -472,7 +472,7 @@ async function initScene() {
     const dustGeo = new THREE.BufferGeometry();
     dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
     const dustMat = new THREE.PointsMaterial({ size: 0.022, transparent: true, opacity: 0.45, depthWrite: false });
-    dustMat.color.set('#F1EEE8');
+    dustMat.color.set('#AEF4FF');
     const dust = new THREE.Points(dustGeo, dustMat);
     scene.add(dust);
 
