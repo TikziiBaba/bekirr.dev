@@ -273,6 +273,25 @@ button, input, textarea { font: inherit; color: inherit; }
 .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .form-note { font-size: 0.875rem; color: var(--muted); }
 
+/* ---------- Oyun sayfası ---------- */
+.game-hero { padding-top: 88px; padding-bottom: 72px; }
+.game-hero h1 { margin-top: 12px; }
+.game-meta { margin-top: 16px; font-family: var(--mono); font-size: 0.8125rem; color: var(--muted); }
+.game-shot {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+.game-cover { margin-top: 48px; }
+.game-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.game-shots > * + * { margin-top: 0; }
+.game-steps { padding-left: 20px; }
+.game-steps li + li { margin-top: 12px; }
+.game-steps strong { font-weight: 600; color: var(--heading); }
+.game-steps code, .game-hash code { font-family: var(--mono); font-size: 0.8125rem; overflow-wrap: anywhere; }
+.game-hash { font-size: 0.8125rem; color: var(--muted); }
+
 /* ---------- Alt bilgi ---------- */
 .footer {
     display: flex;
@@ -308,6 +327,8 @@ button, input, textarea { font: inherit; color: inherit; }
     .stats div:nth-child(n + 3) { border-top: 1px solid var(--line); }
     .skill-groups { grid-template-columns: 1fr; }
     .contact-form { grid-template-columns: 1fr; }
+    .game-hero { padding-top: 56px; padding-bottom: 48px; }
+    .game-shots { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
